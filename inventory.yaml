@@ -1,0 +1,59 @@
+---
+# pihole:
+#   hosts:
+#     docker-on-main:
+#       ansible_host: 192.168.50.212
+#       ansible_user: 'ubuntu'
+#       ansible_become: true
+#       ansible_become_method: sudo
+#       ansible_ssh_private_key_file: ~/.ssh/ansible
+#     docker-on-small:
+#       ansible_host: 192.168.50.211
+#       ansible_user: 'ubuntu'
+#       ansible_become: true
+#       ansible_become_method: sudo
+#       ansible_ssh_private_key_file: ~/.ssh/ansible
+
+# databases:
+#   hosts:
+#     main-database:
+#       ansible_host: 192.168.50.226
+#       ansible_user: 'ubuntu'
+#       ansible_become: true
+#       ansible_become_method: sudo
+#       ansible_ssh_private_key_file: ~/.ssh/ansible 
+
+# docker-containers:
+#   hosts:
+#     main-docker-apps:
+#       ansible_host: 192.168.50.180
+#       ansible_user: 'ubuntu'
+#       ansible_become: true
+#       ansible_become_method: sudo
+#       ansible_ssh_private_key_file: ~/.ssh/ansible
+#     jenkins-agent:
+#       ansible_host: 192.168.50.224
+#       ansible_user: 'ubuntu'
+#       ansible_become: true
+#       ansible_become_method: sudo
+#       ansible_ssh_private_key_file: ~/.ssh/ansible 
+
+# usa4foryou-server:
+#   hosts:
+#     usa4foryou-server:
+#       ansible_host: 192.168.50.87
+#       ansible_user: 'ubuntu'
+#       ansible_become: true
+#       ansible_become_method: sudo
+#       ansible_ssh_private_key_file: ~/.ssh/ansible
+
+ubuntu-with-gpu:
+  hosts:
+    ubuntu-with-gpu:
+      ansible_host: 192.168.50.208
+      ansible_user: 'botir'
+      ansible_become: true
+      ansible_become_method: sudo
+      ansible_become_pass: '{{ lookup("ansible.builtin.env", "UBUNTU_WITH_GPU_PASS") }}'
+      ansible_ssh_private_key_file: ~/.ssh/ansible
+    

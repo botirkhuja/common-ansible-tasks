@@ -1,0 +1,76 @@
+---
+# - name: Install Docker on all Machines
+#   hosts: all
+#   become: true
+#   roles:
+#     - role: docker_install
+#       tags:
+#         - install
+#         - docker
+
+# - name: Cofigure pihole containers
+#   hosts: pihole
+#   become: true
+#   roles:
+#     - role: pihole_deploy
+#       tags:
+#         - deploy
+#         - pihole
+#     - role: traefik_deploy
+#       tags:
+#         - deloy
+#         - traefik
+#     - role: homepage_deploy
+#       tags:
+#         - deploy
+#         - homepage
+
+# - name: Install Nebula Sync
+#   hosts: docker-on-main
+#   become: true
+#   roles:
+#     - role: nebula-sync_deploy
+#       tags:
+#         - deloy
+#         - nebula-sync
+
+
+# - name: Setup databases
+#   hosts: databases
+#   become: true
+#   roles:
+#     - role: minio_deploy
+#       tags:
+#         - deploy
+#         - minio
+#     - role: mariadb_deploy
+#       tags:
+#         - deploy
+#         - mariadb
+
+# - name: Setup jenkins on main VM for docker apps
+#   hosts: main-docker-apps
+#   become: true
+#   roles:
+#     - role: jenkins_deploy
+#       tags:
+#         - deploy
+#         - jenkins
+
+# - name: Setup jenkins agent on agent vm
+#   hosts: jenkins-agent
+#   become: true
+#   roles:
+#     - role: jenkins_agents_deploy
+#       tags:
+#         - deploy
+#         - jenkins-agent
+
+- name: Back up main data to external hdd
+  hosts: ubuntu-with-gpu
+  become: true
+  roles:
+    - role: backup_main_data
+      tags:
+        - backup
+        - main-data
