@@ -12,7 +12,7 @@ pipeline {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
                   disableHostKeyChecking: true,
                   installation: 'ansible',
-                  // sudoUser: 'ubuntu',
+                  sudoUser: 'botir',
                   inventory: 'inventory.yaml',
                   playbook: 'playbook.yaml'
             }
