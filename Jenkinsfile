@@ -9,6 +9,17 @@ pipeline {
     }
 
     stages {
+        stage('install rsync') {
+            steps {
+                script {
+                    // Install rsync if not already installed
+                    def rsyncInstalled = sh(script: 'which rsync', returnStatus: true)
+                    if (rsyncInstalled != 0) {
+                        sh 'sudo apt-get update && sudo apt-get install -y rsync'
+                    }
+                }
+            }
+        }
         stage('Run Ansible Playbook') {
             steps {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
