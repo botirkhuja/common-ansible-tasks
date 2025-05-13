@@ -3,10 +3,10 @@ pipeline {
       label 'jenkins-ubuntu-agent'
     }
 
-    environment {
-        EXTERNAL_HDD_UUID = credentials('external_hdd_uuid')
-        UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
-    }
+    // environment {
+    //     EXTERNAL_HDD_UUID = credentials('external_hdd_uuid')
+    //     UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
+    // }
 
     stages {
         stage('Run Ansible Playbook') {
@@ -15,14 +15,14 @@ pipeline {
                   disableHostKeyChecking: true,
                   // installation: 'ansible',
                   // become: true,
-                  sudoUser: 'botir',
+                //   sudoUser: 'botir',
                   // becomeUser: 'botir',
                   inventory: 'inventory.yaml',
-                  playbook: 'playbook.yaml'
+                  playbook: 'install-qemu.yaml'
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'backup,main-data',
+                //   tags: 'backup,main-data',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: ''
             }
