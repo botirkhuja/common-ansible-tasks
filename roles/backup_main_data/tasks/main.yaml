@@ -30,11 +30,11 @@
 
 - name: Create backup directory based on current date {{ ansible_date_time.date }}
   ansible.builtin.file:
-    path: "/mnt/externalhdd/backup/{{ ansible_date_time.date }}/botir/uploads/"
+    path: "/mnt/externalhdd/backup/{{ ansible_date_time.date }}"
     state: directory
 
 - name: Copy main data to external hard drive
-  ansible.builtin.command: sudo rsync -rhviuat --exclude 'appdata*/' --exclude '*trashbin*/' --exclude '*thumbnails/' /mnt/maindata/botir/uploads/ /mnt/externalhdd/backup/{{ ansible_date_time.date }}/botir/uploads/
+  ansible.builtin.command: sudo rsync -rhviuat --exclude 'appdata*/' --exclude '*trashbin*/' --exclude '*thumbnails/' /mnt/maindata/ /mnt/externalhdd/backup/{{ ansible_date_time.date }}/
   # ansible.posix.synchronize:
   #   src: /mnt/maindata/botir/uploads/
   #   dest: "/mnt/externalhdd/backup/{{ ansible_date_time.date }}/botir/uploads/"
