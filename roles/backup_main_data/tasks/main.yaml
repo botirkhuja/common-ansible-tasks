@@ -34,10 +34,15 @@
     state: directory
 
 - name: Copy main data to external hard drive
-  ansible.builtin.command: sudo rsync -rhviuat --exclude 'appdata*/' --exclude '*trashbin*/' --exclude '*thumbnails/' /mnt/maindata/ /mnt/externalhdd/backup/{{ ansible_date_time.date }}
+  ansible.posix.synchronize:
+    src: /mnt/maindata/botir/uploads/
+    dest: "/mnt/externalhdd/backup/{{ ansible_date_time.date }}/botir/uploads/"
+    rsync_opts:
+      - "--exclude=appdata*/"
+      - "--exclude=*trashbin*/"
+      - "--exclude=*thumbnails/"
   register: rsync_result
-  changed_when: rsync_result.rc != 0
-  failed_when: rsync_result.rc != 0
+  # ansible.builtin.command: sudo rsync -rhviuat --exclude 'appdata*/' --exclude '*trashbin*/' --exclude '*thumbnails/' /mnt/maindata/ /mnt/externalhdd/backup/{{ ansible_date_time.date }}
 - name: Print rsync result
   ansible.builtin.debug:
     var: rsync_result

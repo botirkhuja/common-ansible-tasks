@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+      label 'jenkins-ubuntu-agent'
+    }
 
     environment {
         EXTERNAL_HDD_UUID = credentials('external_hdd_uuid')
@@ -7,14 +9,22 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Run Ansible Playbook') {
             steps {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
                   disableHostKeyChecking: true,
-                  installation: 'ansible',
+                  // installation: 'ansible',
+                  become: true,
                   sudoUser: 'botir',
+                  // becomeUser: 'botir',
                   inventory: 'inventory.yaml',
                   playbook: 'playbook.yaml'
+                  colorized: true,
+                  // forks: 2,
+                  // startAtTask: '004',
+                  // tags: 'deploy',
+                  // vaultCredentialsId: 'external_hdd_uuid',
+                  // vaultTmpPath: ''
             }
         }
     }
