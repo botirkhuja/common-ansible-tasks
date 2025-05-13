@@ -19,7 +19,7 @@ pipeline {
                   // becomeUser: 'botir',
                   inventory: 'inventory.yaml',
                   playbook: 'playbook.yaml'
-                  colorized: true,
+                  // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
                   // tags: 'deploy',
