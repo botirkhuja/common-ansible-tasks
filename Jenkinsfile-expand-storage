@@ -8,6 +8,10 @@ pipeline {
         timestamps()
     }
 
+    environment {
+        UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
+    }
+
     stages {
         stage('Run Ansible Playbook') {
             steps {
