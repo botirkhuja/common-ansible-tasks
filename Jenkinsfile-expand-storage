@@ -6,12 +6,6 @@ pipeline {
     options {
         disableConcurrentBuilds()
         timestamps()
-        // timeout(time: 1, unit: 'HOURS')
-    }
-
-    environment {
-        EXTERNAL_HDD_UUID = credentials('external_hdd_uuid')
-        UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
     }
 
     stages {
@@ -26,7 +20,7 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'backup,main-data',
+                  tags: 'expand-storage',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: '',
                   inventory: 'inventory.yaml',

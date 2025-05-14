@@ -1,5 +1,5 @@
 - name: Install qemu guest agent
-  hosts: test-ubuntu
+  hosts: all
   become: true
   tasks:
     - name: Update and upgrade apt packages
