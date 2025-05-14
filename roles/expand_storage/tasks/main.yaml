@@ -3,6 +3,13 @@
   community.general.parted: device=/dev/sdb unit=MiB
   register: sdb_info
 
+- name: Remove all partitions from disk
+  community.general.parted:
+    device: /dev/sdb
+    number: '{{ item.num }}'
+    state: absent
+  loop: '{{ sdb_info.partitions }}'
+
 - name: Extend an existing partition to fill all available space
   community.general.parted:
     device: /dev/sdb
