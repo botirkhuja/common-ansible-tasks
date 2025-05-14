@@ -20,7 +20,7 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'expand-storage',
+                  tags: 'expand,storage',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: '',
                   inventory: 'inventory.yaml',

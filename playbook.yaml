@@ -78,14 +78,8 @@
 - name: Expand storage on ubuntu with gpu 
   hosts: ubuntu-with-gpu
   become: true
-  tasks:
-    - name: Extend an existing partition to fill all available space
-      community.general.parted:
-        device: /dev/sdb
-        number: "{{ sdb_info.partitions | length }}"
-        part_end: "100%"
-        resize: true
-        state: present
-      register: sdb_info
-      when: sdb_info.partitions | length > 0
-      tags: expand-storage
+  roles:
+    - role: expand_storage
+      tags: 
+        - expand
+        - storage
