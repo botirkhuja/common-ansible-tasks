@@ -27,7 +27,7 @@
 - name: Extend an existing partition to fill all available space
   community.general.parted:
     device: /dev/sdb
-    number: "{{ sdb_info.partitions | length }}"
+    number: 1
     label: gpt
     flags: [ lvm ]
     part_end: "100%"
