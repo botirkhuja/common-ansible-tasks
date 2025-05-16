@@ -10,14 +10,14 @@
 #     state: absent
 #   loop: '{{ sdb_info.partitions }}'
 
-# - name: Create a new ext4 primary partition
-#   community.general.parted:
-#     device: /dev/sdb
-#     number: 1
-#     state: present
-#     fs_type: ext4
-#     flags: [ lvm ]
-#     label: gpt
+- name: Create a new ext4 primary partition
+  community.general.parted:
+    device: /dev/sdb
+    number: 1
+    state: present
+    fs_type: ext4
+    flags: [ lvm ]
+    label: gpt
 
 - name: Create a ext4 filesystem on /dev/sdb1
   community.general.filesystem:
