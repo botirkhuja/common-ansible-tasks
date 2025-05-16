@@ -15,24 +15,24 @@ pipeline {
     }
 
     stages {
-        // stage('Unmount Main Data Storage') {
-        //     steps {
-        //       ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
-        //           disableHostKeyChecking: true,
-        //           // installation: 'ansible',
-        //           // become: true,
-        //         //   sudoUser: 'botir',
-        //           // becomeUser: 'botir',
-        //           // colorized: true,
-        //           // forks: 2,
-        //           // startAtTask: '004',
-        //           tags: 'unmount',
-        //           // vaultCredentialsId: 'external_hdd_uuid',
-        //           // vaultTmpPath: '',
-        //           inventory: 'inventory.yaml',
-        //           playbook: 'playbook.yaml'
-        //     }
-        // }
+        stage('Unmount Main Data Storage') {
+            steps {
+              ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
+                  disableHostKeyChecking: true,
+                  // installation: 'ansible',
+                  // become: true,
+                //   sudoUser: 'botir',
+                  // becomeUser: 'botir',
+                  // colorized: true,
+                  // forks: 2,
+                  // startAtTask: '004',
+                  tags: 'unmount',
+                  // vaultCredentialsId: 'external_hdd_uuid',
+                  // vaultTmpPath: '',
+                  inventory: 'inventory.yaml',
+                  playbook: 'playbook.yaml'
+            }
+        }
 
         stage('Expand Storages') {
             steps {
@@ -53,24 +53,24 @@ pipeline {
             }
         }
 
-        // stage('Mount Main Data Storage') {
-        //     steps {
-        //       ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
-        //           disableHostKeyChecking: true,
-        //           // installation: 'ansible',
-        //           // become: true,
-        //         //   sudoUser: 'botir',
-        //           // becomeUser: 'botir',
-        //           // colorized: true,
-        //           // forks: 2,
-        //           // startAtTask: '004',
-        //           tags: 'mount',
-        //           // vaultCredentialsId: 'external_hdd_uuid',
-        //           // vaultTmpPath: '',
-        //           inventory: 'inventory.yaml',
-        //           playbook: 'playbook.yaml'
-        //     }
-        // }
+        stage('Mount Main Data Storage') {
+            steps {
+              ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
+                  disableHostKeyChecking: true,
+                  // installation: 'ansible',
+                  // become: true,
+                //   sudoUser: 'botir',
+                  // becomeUser: 'botir',
+                  // colorized: true,
+                  // forks: 2,
+                  // startAtTask: '004',
+                  tags: 'mount',
+                  // vaultCredentialsId: 'external_hdd_uuid',
+                  // vaultTmpPath: '',
+                  inventory: 'inventory.yaml',
+                  playbook: 'playbook.yaml'
+            }
+        }
     }
 
     post {
