@@ -29,13 +29,11 @@
     device: /dev/sdb
     number: 1
     label: gpt
-    flags: [ lvm ]
     part_end: "100%"
     resize: true
     state: present
   register: sdb1_info
-- name: Resize the filesystem on /dev/sdb1
-  community.general.filesystem:
-    fstype: ext4
-    dev: /dev/sdb1
-    resizefs: true
+
+- name: Result of partition creation
+  debug:
+    var: sdb1_info
