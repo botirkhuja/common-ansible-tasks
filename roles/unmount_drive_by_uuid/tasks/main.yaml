@@ -5,12 +5,10 @@
 - name: Printing mount point variable value from local variable
   ansible.builtin.debug:
     msg: "Mount point is {{ mount_point }}"
-# - name: Check if {{ mount_point }} is mounted
-#   include_role:
-#     name: check_mount_point
-#   vars:
-#     mount_point: "{{ mount_point }}"
-#   register: mount_check
+- name: "Check if {{ mount_point }} is mounted"
+  include_role:
+    name: check_mount_point
+  register: mount_check
 
 # - name: Print mount check result
 #   ansible.builtin.debug:
