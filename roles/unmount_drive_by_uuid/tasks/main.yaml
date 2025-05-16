@@ -1,15 +1,12 @@
 ---
-- name: Printing mount point variable value from environment
-  ansible.builtin.debug:
-    msg: "Mount point is {{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
-- name: Printing mount point variable value from local variable
-  ansible.builtin.debug:
-    msg: "Mount point is {{ mount_point }}"
-- name: "Check if {{ mount_point }} is mounted from main task"
+- name: "Check if {{ partition_uuid }} is mounted from main task"
   include_role:
     name: check_mount_point
   register: mount_check
 
-- name: Print mount check result from main task
-  ansible.builtin.debug:
-    var: mount_check
+# - name: "Unmount {{ mount_point }}"
+#   ansible.posix.mount:
+#     path: "{{ mount_point }}"
+#     src: "UUID={{ partition_uuid }}"
+#     fstype: ext4
+#     state: unmounted

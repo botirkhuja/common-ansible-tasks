@@ -11,6 +11,7 @@ pipeline {
     environment {
         UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
         MOUNT_POINT = '/mnt/maindata'
+        PARTITION_UUID = credentials('main-data-hdd-uuid')
     }
 
     stages {

@@ -87,7 +87,7 @@
       vars:
         disk_device: /dev/sdb
         mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
-        partition_uuid: 12345678-1234-5678-1234-567812345678
+        partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
     # - role: expand_storage
     #   tags: 
     #     - main-data-storage
