@@ -10,10 +10,17 @@
     state: absent
   loop: '{{ sdb_info.partitions }}'
 
-- name: Extend an existing partition to fill all available space
+- name: Create a new ext4 primary partition
   community.general.parted:
     device: /dev/sdb
     number: 1
     part_end: "100%"
-    resize: true
     state: present
+    fs_type: ext4
+
+# - name: Extend an existing partition to fill all available space
+#   community.general.parted:
+#     device: /dev/sdb
+#     number: 1
+#     resize: true
+#     state: present
