@@ -1,7 +1,7 @@
 ---
-# - name: Read device information (always use unit when probing)
-#   community.general.parted: device=/dev/sdb unit=MiB
-#   register: sdb_info
+- name: Read device information (always use unit when probing)
+  community.general.parted: device=/dev/sdb unit=MiB
+  register: sdb_info
 
 # - name: Remove all partitions from disk
 #   community.general.parted:
@@ -20,21 +20,22 @@
 #     label: gpt
 #     part_end: "100%"
 
-- name: Resize the partition
-  shell: |
-    parted -s -m -a optimal /dev/sdb resizepart 1 yes 100%
-
 # - name: Create a ext4 filesystem on /dev/sdb1
 #   community.general.filesystem:
 #     fstype: ext4
 #     dev: /dev/sdb1
 
-# - name: Extend an existing partition to fill all available space
-#   community.general.parted:
-#     device: /dev/sdb
-#     number: 1
-#     label: gpt
-#     part_end: "100%"
-#     resize: true
-#     state: present
-#   register: sdb1_info
+- name: Extend an existing partition to fill all available space
+  community.general.parted:
+    device: /dev/sdb
+    number: 1
+    label: gpt
+    part_end: "100%"
+    resize: true
+    state: present
+
+- name: Resize the filesystem on /dev/sdb1
+  community.general.filesystem:
+    fstype: ext4
+    dev: /dev/sdb1
+    resizefs: true
