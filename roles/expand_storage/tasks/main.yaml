@@ -14,7 +14,7 @@
   community.general.parted:
     device: /dev/sdb
     number: 1
-    part_end: "100%"
+    # part_end: "100%"
     state: present
     fs_type: ext4
 
