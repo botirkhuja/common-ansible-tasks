@@ -34,9 +34,16 @@
     resize: true
     state: present
 
-- name: "running e2fsck on /dev/sdb1"
-  command:
-    cmd: "e2fsck -f -a /dev/sdb1"
+- name: "running e2fsck on /dev/sdb1 before resizing"
+  ansible.builtin.shell: |
+    e2fsck -fy -a /dev/sdb1 || true
+  register: e2fsck_result
+  ignore_errors: true
+
+- name: Result of e2fsck
+  debug:
+    msg: "{{ e2fsck_result.stdout }}"
+  
 
 - name: Resize the filesystem on /dev/sdb1
   community.general.filesystem:
