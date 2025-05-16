@@ -3,9 +3,9 @@
     name: check_mount_point
   register: mount_check
 
-- name: "Unmount {{ mount_point }}"
+- name: "Mount partition to {{ mount_point }}"
   ansible.posix.mount:
     path: "{{ mount_point }}"
     src: "UUID={{ partition_uuid }}"
     fstype: ext4
-    state: unmounted
+    state: mounted
