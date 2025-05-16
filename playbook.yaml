@@ -75,11 +75,24 @@
         - backup
         - main-data
 
-- name: Expand storage on ubuntu with gpu 
+- name: Expand main data storage
   hosts: ubuntu-with-gpu
   become: true
   roles:
-    - role: expand_storage
+    - role: unmount_drive_by_uuid
       tags: 
-        - expand
-        - storage
+        - never
+        - main-data-storage
+        - unmount
+      vars:
+        disk_device: /dev/sdb
+        mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
+        partition_uuid: 12345678-1234-5678-1234-567812345678
+    # - role: expand_storage
+    #   tags: 
+    #     - main-data-storage
+    #     - expand
+    #   vars:
+    #     disk_device: /dev/sdb
+    #     mount_point: /mnt/maindata
+    #     partition_uuid: 12345678-1234-5678-1234-567812345678

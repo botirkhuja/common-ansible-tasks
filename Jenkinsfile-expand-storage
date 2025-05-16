@@ -10,10 +10,11 @@ pipeline {
 
     environment {
         UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
+        MOUNT_POINT = '/mnt/maindata'
     }
 
     stages {
-        stage('Run Ansible Playbook') {
+        stage('Unmount Main Data Storage') {
             steps {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
                   disableHostKeyChecking: true,
@@ -24,7 +25,7 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'expand,storage',
+                  tags: 'main-data-storage,unmount',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: '',
                   inventory: 'inventory.yaml',

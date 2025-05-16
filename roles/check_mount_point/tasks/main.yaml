@@ -1,0 +1,17 @@
+---
+- name: "Check if {{ mount_point }} is mounted"
+  ansible.builtin.command: "mount | grep {{ mount_point }}"
+  register: mount_check
+  changed_when: false
+  failed_when: false
+- name: Print mount check result
+  ansible.builtin.debug:
+    var: mount_check
+- name: Check if external hard drive is mounted
+  ansible.builtin.debug:
+    msg: "External hard drive is mounted"
+  when: mount_check.rc == 1
+- name: Check if external hard drive is not mounted
+  ansible.builtin.debug:
+    msg: "External hard drive is not mounted"
+  when: mount_check.rc == 0
