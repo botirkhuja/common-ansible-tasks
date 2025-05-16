@@ -34,6 +34,10 @@
     resize: true
     state: present
 
+- name: run e2fsck on /dev/sdb1
+  community.general.command:
+    cmd: e2fsck -f -a /dev/sdb1
+
 - name: Resize the filesystem on /dev/sdb1
   community.general.filesystem:
     fstype: ext4
