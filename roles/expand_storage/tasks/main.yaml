@@ -28,6 +28,8 @@
   community.general.parted:
     device: /dev/sdb
     number: "{{ sdb_info.partitions | length }}"
+    label: gpt
+    flags: [ lvm ]
     part_end: "100%"
     resize: true
     state: present
