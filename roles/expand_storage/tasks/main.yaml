@@ -15,7 +15,6 @@
     device: /dev/sdb
     number: 1
     fs_type: gpt
-    part_start: 0
     part_end: "100%"
     state: present
 
