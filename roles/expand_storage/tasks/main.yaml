@@ -14,9 +14,10 @@
   community.general.parted:
     device: /dev/sdb
     number: 1
-    fs_type: gpt
-    part_end: "100%"
     state: present
+    fs_type: ext4
+    flags: [ lvm ]
+    label: gpt
 
 # - name: Extend an existing partition to fill all available space
 #   community.general.parted:
