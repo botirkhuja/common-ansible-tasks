@@ -82,7 +82,6 @@
     - role: unmount_drive_by_uuid
       tags: 
         - never
-        - main-data-storage
         - unmount
       vars:
         disk_device: /dev/sdb
@@ -91,7 +90,6 @@
     - role: mount_drive_by_uuid
       tags: 
         - never
-        - main-data-storage
         - mount
       vars:
         disk_device: /dev/sdb
