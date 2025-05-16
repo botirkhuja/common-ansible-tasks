@@ -34,8 +34,9 @@
     resize: true
     state: present
 
-- name: run e2fsck on /dev/sdb1
-  community.builtin.command: "e2fsck -f  -a /dev/sdb1"
+- name: "running e2fsck on /dev/sdb1"
+  command:
+    cmd: "e2fsck -f -a /dev/sdb1"
 
 - name: Resize the filesystem on /dev/sdb1
   community.general.filesystem:
