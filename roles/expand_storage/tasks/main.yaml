@@ -33,3 +33,9 @@
     part_end: "100%"
     resize: true
     state: present
+  register: sdb1_info
+- name: Resize the filesystem on /dev/sdb1
+  community.general.filesystem:
+    fstype: ext4
+    dev: /dev/sdb1
+    resizefs: true
