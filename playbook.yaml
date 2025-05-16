@@ -75,7 +75,7 @@
         - backup
         - main-data
 
-- name: Expand main data storage
+- name: Expand main data storage {{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}
   hosts: ubuntu-with-gpu
   become: true
   roles:
