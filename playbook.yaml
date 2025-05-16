@@ -75,39 +75,29 @@
         - backup
         - main-data
 
-- name: Expand main data storage {{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}
-  hosts: ubuntu-with-gpu
+- hosts: "{{ lookup('ansible.builtin.env', 'HOSTS') }}"
   become: true
+  vars:
+    mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
+    partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
+    disk_device: /dev/sdb
   roles:
     - role: unmount_drive_by_uuid
       tags: 
         - never
         - unmount
-      vars:
-        disk_device: /dev/sdb
-        mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
-        partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
     - role: expand_storage
       tags: 
         - never
         - expand
+    - role: backup_main_data
+      tags:
+        - never
+        - copy
       vars:
-        disk_device: /dev/sdb
-        mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
-        partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
+        to_place: "{{ mount_point }}"
+        from_place: "{{ lookup('ansible.builtin.env', 'FROM_PLACE') }}"
     - role: mount_drive_by_uuid
       tags: 
         - never
         - mount
-      vars:
-        disk_device: /dev/sdb
-        mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
-        partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
-    # - role: expand_storage
-    #   tags: 
-    #     - main-data-storage
-    #     - expand
-    #   vars:
-    #     disk_device: /dev/sdb
-    #     mount_point: /mnt/maindata
-    #     partition_uuid: 12345678-1234-5678-1234-567812345678
