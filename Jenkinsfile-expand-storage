@@ -15,8 +15,8 @@ pipeline {
     }
 
     parameters {
-      string(name: 'DISK_NAME', defaultValue: 'sdc', description: 'The disk name to be used.'),
-      string(name: 'PARTITION_NAME', defaultValue: 'sdc1', description: 'The partition name to be used.'),
+      string(name: 'DISK_NAME', defaultValue: 'sdc', description: 'The disk name to be used.')
+      string(name: 'PARTITION_NAME', defaultValue: 'sdc1', description: 'The partition name to be used.')
       // mount point
       string(name: 'MOUNT_POINT', defaultValue: '/mnt/llms', description: 'The mount point.')
       string(name: 'HOSTS', defaultValue: 'all', description: 'The hosts to run the playbook on.')
