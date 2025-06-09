@@ -1,4 +1,8 @@
 ---
+- name: Read device information (always use unit when probing)
+  community.general.parted: "device={{ disk_device }} unit=MiB"
+  register: sdb_info
+
 - name: Extend an existing partition to fill all available space
   community.general.parted:
     device: "{{ disk_device }}"
