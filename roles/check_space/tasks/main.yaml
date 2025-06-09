@@ -11,15 +11,15 @@
 
 - name: Print disk information
   ansible.builtin.debug:
-    var: disk_info.stdout_lines
+    var: disk_info
 
-- name: Gather facts
-  ansible.builtin.setup:
-    gather_subset:
-      - hardware
-      - network
-      - virtual
-      - disk
-- name: Print gathered facts
-  ansible.builtin.debug:
-    var: ansible_facts
+# - name: Gather facts
+#   ansible.builtin.setup:
+#     gather_subset:
+#       - hardware
+#       - network
+#       - virtual
+#       - disk
+# - name: Print gathered facts
+#   ansible.builtin.debug:
+#     var: ansible_facts
