@@ -9,7 +9,7 @@
 
 - name: Check if {{ mount_point }} is in mounts list
   ansible.builtin.set_fact:
-    mount_check: "{{ mount_point in mounts['mount'] }}"
+    mount_check: "{{ mount_point in mounts }}"
 
 - name: Print mount check result
   ansible.builtin.debug:
