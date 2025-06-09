@@ -1,7 +1,11 @@
 ---
+- name: "Get partition UUID from {{ partition_device }}"
+  ansible.builtin.command: "blkid -s UUID -o value {{ partition_device }}"
+  register: partition_uuid_result
+
 - name: "Mount partition to {{ mount_point }}"
   ansible.posix.mount:
     path: "{{ mount_point }}"
-    src: "UUID={{ partition_uuid }}"
+    src: "UUID={{ partition_uuid_result.stdout }}"
     fstype: ext4
     state: mounted

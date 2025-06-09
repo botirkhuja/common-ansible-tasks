@@ -10,8 +10,15 @@ pipeline {
 
     environment {
         UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
-        MOUNT_POINT = '/mnt/maindata'
+        // MOUNT_POINT = '/mnt/maindata'
         PARTITION_UUID = credentials('main-data-hdd-uuid')
+    }
+
+    parameters {
+      string(name: 'DISK_NAME', defaultValue: 'sdc', description: 'The disk name to be used.'),
+      string(name: 'PARTITION_NAME', defaultValue: 'sdc1', description: 'The partition name to be used.'),
+      // mount point
+      string(name: 'MOUNT_POINT', defaultValue: '/mnt/llms', description: 'The mount point.')
     }
 
     stages {

@@ -1,20 +1,20 @@
 ---
 - name: Read device information (always use unit when probing)
-  community.general.parted: device=/dev/sdb unit=MiB
+  community.general.parted: "device={{ disk_device }} unit=MiB"
   register: sdb_info
 
 - name: Extend an existing partition to fill all available space
   community.general.parted:
-    device: /dev/sdb
+    device: "{{ disk_device }}"
     number: 1
     label: gpt
     part_end: "100%"
     resize: true
     state: present
 
-- name: "running e2fsck on /dev/sdb1 before resizing"
+- name: "running e2fsck on {{ partition_device }} before resizing"
   ansible.builtin.shell: |
-    e2fsck -fy -a /dev/sdb1 || true
+    "e2fsck -fy -a {{partition_device}} || true"
   register: e2fsck_result
   ignore_errors: true
 
@@ -23,8 +23,8 @@
     msg: "{{ e2fsck_result.stdout }}"
   when: e2fsck_result is defined
 
-- name: Resize the filesystem on /dev/sdb1
+- name: "Resize the filesystem on {{ partition_device}}"
   community.general.filesystem:
     fstype: ext4
-    dev: /dev/sdb1
+    dev: "{{ partition_device }}"
     resizefs: true
