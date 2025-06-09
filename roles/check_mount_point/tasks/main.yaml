@@ -3,6 +3,10 @@
   ansible.builtin.set_fact:
     mounts: "{{ ansible_mounts | map(attribute='mount') | list }}"
 
+- name: Print mounts fact
+  ansible.builtin.debug:
+    var: mounts
+
 - name: Check if {{ mount_point }} is in mounts list
   ansible.builtin.set_fact:
     mount_check: "{{ mount_point in mounts['mount'] }}"
