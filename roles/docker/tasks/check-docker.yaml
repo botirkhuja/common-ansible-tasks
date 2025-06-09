@@ -1,0 +1,12 @@
+---
+- name: Ensure docker-compose is installed
+  ansible.builtin.package:
+    name: docker-compose-plugin
+    state: present
+  failed_when: ansible_facts.packages['docker-compose-plugin'] is not defined
+
+- name: Ensure Docker service is running
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true

@@ -1,0 +1,52 @@
+pipeline {
+    agent {
+      label 'jenkins-ubuntu-agent'
+    }
+
+    options {
+        disableConcurrentBuilds()
+        timestamps()
+    }
+
+    environment {
+        UBUNTU_WITH_GPU_PASS = credentials('ubuntu_with_gpu_pass')
+        // MOUNT_POINT = '/mnt/maindata'
+        // PARTITION_UUID = credentials('main-data-hdd-uuid')
+    }
+
+    parameters {
+      // string(name: 'DISK_NAME', defaultValue: 'sdc', description: 'The disk name to be used.')
+      // string(name: 'PARTITION_NAME', defaultValue: 'sdc1', description: 'The partition name to be used.')
+      // mount point
+      // string(name: 'MOUNT_POINT', defaultValue: '/mnt/llms', description: 'The mount point.')
+      string(name: 'HOSTS', defaultValue: '', description: 'The hosts to run the playbook on.')
+      choice(name: 'DEPLOYING_STACK', choices: ['ollama'], description: 'Choose the action to perform.')
+    }
+
+    stages {
+        stage('Deploy docker apps') {
+            steps {
+              ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
+                  disableHostKeyChecking: true,
+                  // installation: 'ansible',
+                  // become: true,
+                //   sudoUser: 'botir',
+                  // becomeUser: 'botir',
+                  colorized: true,
+                  // forks: 2,
+                  // startAtTask: '004',
+                  tags: DEPLOYING_STACK,
+                  // vaultCredentialsId: 'external_hdd_uuid',
+                  // vaultTmpPath: '',
+                  inventory: 'inventory.yaml',
+                  playbook: 'playbook.yaml'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'This will always run after the stages.'
+        }
+    }
+}

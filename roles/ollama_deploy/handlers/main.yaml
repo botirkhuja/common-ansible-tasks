@@ -1,0 +1,5 @@
+---
+- name: Start ollama
+  community.docker.docker_compose_v2:
+    project_src: "~/docker-compose/ollama"
+    state: restarted

@@ -102,3 +102,7 @@
       tags: 
         - never
         - unmount_by_partition
+    - role: ollama_deploy
+      tags:
+        - never
+        - ollama
