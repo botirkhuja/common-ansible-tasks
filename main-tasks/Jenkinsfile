@@ -6,24 +6,20 @@ pipeline {
     options {
         disableConcurrentBuilds()
         timestamps()
+        // timeout(time: 1, unit: 'HOURS')
     }
 
     environment {
-        UBUNTU_WITH_GPU_PASS = credentials('ubuntu_with_gpu_pass')
-        // MOUNT_POINT = '/mnt/maindata'
-        PARTITION_UUID = credentials('main-data-hdd-uuid')
-    }
-
-    parameters {
-      string(name: 'DISK_NAME', defaultValue: 'sdc', description: 'The disk name to be used.')
-      string(name: 'PARTITION_NAME', defaultValue: 'sdc1', description: 'The partition name to be used.')
-      // mount point
-      string(name: 'MOUNT_POINT', defaultValue: '/mnt/llms', description: 'The mount point.')
-      string(name: 'HOSTS', defaultValue: '', description: 'The hosts to run the playbook on.')
+        EXTERNAL_HDD_UUID = credentials('external_hdd_uuid')
+        UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
+        HOSTS = 'ubuntu-with-gpu'
+        MOUNT_POINT = '/mnt/externalhdd'
+        FROM_PLACE = '/mnt/maindata'
+        PARTITION_UUID = credentials('external_hdd_uuid')
     }
 
     stages {
-        stage('Unmount Main Data Storage') {
+        stage('Mount storage') {
             steps {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
                   disableHostKeyChecking: true,
@@ -34,15 +30,14 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'unmount_by_partition',
+                  tags: 'mount',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: '',
                   inventory: 'inventory.yaml',
                   playbook: 'playbook.yaml'
             }
         }
-
-        stage('Expand Storages') {
+        stage('Copy data') {
             steps {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
                   disableHostKeyChecking: true,
@@ -53,15 +48,14 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'expand_storage',
+                  tags: 'copy',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: '',
                   inventory: 'inventory.yaml',
                   playbook: 'playbook.yaml'
             }
         }
-
-        stage('Mount Main Data Storage') {
+        stage('Unmount storage') {
             steps {
               ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
                   disableHostKeyChecking: true,
@@ -72,7 +66,7 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                  tags: 'mount_by_partition',
+                  tags: 'unmount',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: '',
                   inventory: 'inventory.yaml',

@@ -1,13 +1,8 @@
 ---
-- name: "Get partition UUID from {{ partition_device }}"
-  ansible.builtin.command: "blkid -s UUID -o value {{ partition_device }}"
-  register: partition_uuid_result
-  when: is_mounted == true
-
 - name: "Unmount {{ mount_point }} if it is mounted"
   ansible.posix.mount:
     path: "{{ mount_point }}"
-    src: "UUID={{ partition_uuid_result.stdout }}"
+    src: "UUID={{ partition_uuid }}"
     fstype: ext4
     state: unmounted
   when: is_mounted == true

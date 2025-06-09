@@ -22,7 +22,6 @@ pipeline {
                   // colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
-                //   tags: 'backup,main-data',
                   // vaultCredentialsId: 'external_hdd_uuid',
                   // vaultTmpPath: ''
             }

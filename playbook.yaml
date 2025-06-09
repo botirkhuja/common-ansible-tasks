@@ -66,38 +66,39 @@
 #         - deploy
 #         - jenkins-agent
 
-- name: Back up main data to external hdd
-  hosts: ubuntu-with-gpu
-  become: true
-  roles:
-    - role: backup_main_data
-      tags:
-        - backup
-        - main-data
-
 - hosts: "{{ lookup('ansible.builtin.env', 'HOSTS') }}"
   become: true
+  gather_facts: true
   vars:
     mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
     disk_device: "/dev/{{ lookup('ansible.builtin.env', 'DISK_NAME') }}"
     partition_device: "/dev/{{ lookup('ansible.builtin.env', 'PARTITION_NAME') }}"
+    partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
   roles:
     - role: unmount_drive_by_uuid
       tags: 
         - never
-        - unmount
+        - unmount_by_uuid
     - role: expand_storage
       tags: 
         - never
-        - expand
+        - expand_storage
     - role: backup_main_data
       tags:
         - never
-        - copy
+        - copy_main_data
       vars:
         to_place: "{{ mount_point }}"
         from_place: "{{ lookup('ansible.builtin.env', 'FROM_PLACE') }}"
     - role: mount_drive_by_uuid
       tags: 
         - never
-        - mount
+        - mount_by_uuid
+    - role: mount_drive_by_partition
+      tags: 
+        - never
+        - mount_by_partition
+    - role: unmount_drive_by_partition
+      tags: 
+        - never
+        - unmount_by_partition
