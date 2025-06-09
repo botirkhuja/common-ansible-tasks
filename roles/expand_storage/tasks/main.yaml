@@ -14,7 +14,7 @@
 
 - name: "running e2fsck on {{ partition_device }} before resizing"
   ansible.builtin.shell: |
-    "e2fsck -fy -a {{partition_device}} || true"
+    "e2fsck -fy {{partition_device}} || true"
   register: e2fsck_result
   ignore_errors: true
 
