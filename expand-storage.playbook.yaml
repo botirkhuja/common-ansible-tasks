@@ -1,6 +1,7 @@
 ---
 - hosts: "{{ lookup('ansible.builtin.env', 'HOSTS') }}"
   become: true
+  gather_facts: true
   vars:
     mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
     disk_device: "/dev/{{ lookup('ansible.builtin.env', 'DISK_NAME') }}"

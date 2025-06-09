@@ -1,9 +1,12 @@
 ---
-- name: "Check if {{ mount_point }} is mounted"
-  ansible.builtin.shell: "lsblk | grep {{ mount_point }}"
-  register: mount_check
-  changed_when: false
-  failed_when: false
+- name: Set mounts fact
+  ansible.builtin.set_fact:
+    mounts: "{{ ansible_mounts | map(attribute='mount') | list }}"
+
+- name: Check if {{ mount_point }} is in mounts list
+  ansible.builtin.set_fact:
+    mount_check: "{{ mount_point in mounts['mount'] }}"
+
 - name: Print mount check result
   ansible.builtin.debug:
     var: mount_check
