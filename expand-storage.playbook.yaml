@@ -1,0 +1,20 @@
+---
+- hosts: "{{ lookup('ansible.builtin.env', 'HOSTS') }}"
+  become: true
+  vars:
+    mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
+    disk_device: "/dev/{{ lookup('ansible.builtin.env', 'DISK_NAME') }}"
+    partition_device: "/dev/{{ lookup('ansible.builtin.env', 'PARTITION_NAME') }}"
+  roles:
+    - role: unmount_drive_by_uuid
+      tags: 
+        - never
+        - unmount
+    - role: expand_storage
+      tags: 
+        - never
+        - expand
+    - role: mount_drive_by_uuid
+      tags: 
+        - never
+        - mount
