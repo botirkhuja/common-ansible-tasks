@@ -24,7 +24,7 @@ pipeline {
                   // become: true,
                   //   sudoUser: 'botir',
                   // becomeUser: 'botir',
-                  // colorized: true,
+                  colorized: true,
                   // forks: 2,
                   // startAtTask: '004',
                   // vaultCredentialsId: 'external_hdd_uuid',
