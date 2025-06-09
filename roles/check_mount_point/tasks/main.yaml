@@ -9,16 +9,16 @@
 
 - name: Check if {{ mount_point }} is in mounts list
   ansible.builtin.set_fact:
-    mount_check: "{{ mount_point in mounts }}"
+    is_mounted: "{{ mount_point in mounts }}"
 
 - name: Print mount check result
   ansible.builtin.debug:
-    var: mount_check
+    var: is_mounted
 - name: Check if external hard drive is mounted
   ansible.builtin.debug:
     msg: "External hard drive is mounted"
-  when: mount_check.rc == 1
+  when: is_mounted == true
 - name: Check if external hard drive is not mounted
   ansible.builtin.debug:
     msg: "External hard drive is not mounted"
-  when: mount_check.rc == 0
+  when: is_mounted == false
