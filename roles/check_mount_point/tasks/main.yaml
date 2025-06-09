@@ -1,6 +1,6 @@
 ---
 - name: "Check if {{ mount_point }} is mounted"
-  ansible.builtin.command: "lsblk | grep {{ mount_point }}"
+  ansible.builtin.shell: "lsblk | grep {{ mount_point }}"
   register: mount_check
   changed_when: false
   failed_when: false
