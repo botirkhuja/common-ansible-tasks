@@ -3,4 +3,23 @@
   ansible.builtin.command: df -h
   register: space
 - ansible.builtin.debug:
-        var: space.stdout_lines
+    var: space.stdout_lines
+
+- name: Get disk information
+  ansible.builtin.shell: lsblk
+  register: disk_info
+
+- name: Print disk information
+  ansible.builtin.debug:
+    var: disk_info.stdout_lines
+
+- name: Gather facts
+  ansible.builtin.setup:
+    gather_subset:
+      - hardware
+      - network
+      - virtual
+      - disk
+- name: Print gathered facts
+  ansible.builtin.debug:
+    var: ansible_facts
