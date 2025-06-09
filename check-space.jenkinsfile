@@ -1,0 +1,43 @@
+pipeline {
+    agent {
+      label 'jenkins-ubuntu-agent'
+    }
+
+    options {
+        timestamps()
+    }
+
+    parameters {
+        string(name: 'HOSTS', defaultValue: 'all', description: 'The hosts to run the playbook on.')
+    }
+
+    environment {
+        UBUNTU_WITH_GPU_PASS= credentials('ubuntu_with_gpu_pass')
+    }
+
+    stages {
+        stage('Check space') {
+            steps {
+              ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
+                  disableHostKeyChecking: true,
+                  // installation: 'ansible',
+                  // become: true,
+                  //   sudoUser: 'botir',
+                  // becomeUser: 'botir',
+                  // colorized: true,
+                  // forks: 2,
+                  // startAtTask: '004',
+                  // vaultCredentialsId: 'external_hdd_uuid',
+                  // vaultTmpPath: '',
+                  inventory: 'inventory.yaml',
+                  playbook: 'check_space.playbook.yaml'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'This will always run after the stages.'
+        }
+    }
+}

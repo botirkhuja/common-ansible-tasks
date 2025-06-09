@@ -1,0 +1,5 @@
+---
+- hosts: "{{ lookup('ansible.builtin.env', 'HOSTS') }}"
+  become: true
+  roles:
+    - role: check_space
