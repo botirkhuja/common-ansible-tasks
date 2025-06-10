@@ -1,0 +1,206 @@
+http:
+  routers:
+
+    traefik-secure:
+      rule: Host(`traefik-dashboard.local.{{ registerable_domain }}`)
+      entryPoints:
+        - "https"
+      priority: 10
+      tls:
+        certresolver: porkbun
+        domains:
+          - main: "ts.{{ registerable_domain }}"
+            sans: "*.ts.{{ registerable_domain }}"
+          - main: "local.{{ registerable_domain }}"
+            sans: "*.local.{{ registerable_domain }}"
+      service: api@internal
+    
+    alist:
+      entryPoints:
+        - "https"
+      rule: Host(`alist.local.{{ registerable_domain }}`)
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: alist-service
+
+    filebrowser:
+      entryPoints:
+        - "https"
+      rule: Host(`filebrowser.local.{{ registerable_domain }}`)
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: filebrowser-service
+
+    homepage:
+      entryPoints:
+        - "https"
+      rule: "Host(`hmpg.local.{{ registerable_domain }}`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: homepage-svc
+
+    immich:
+      entryPoints:
+        - "https"
+      rule: "Host(`immich.local.{{ registerable_domain }}`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: immich-service
+
+    jellyfin:
+      entryPoints:
+        - "https"
+      rule: Host(`jellyfin.local.{{ registerable_domain }}`)
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+        - jellyfin-mw
+      tls: {}
+      service: jellyfin-service
+
+    jenkins-server:
+      rule: "Host(`jenkins.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls:
+        certresolver: porkbun
+      service: jenkins-server-service
+
+    minio-console:
+      rule: "Host(`console-minios3.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls:
+        certresolver: porkbun
+      service: minio-console-service
+
+    minio-server:
+      rule: "Host(`minios3.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls:
+        certresolver: porkbun
+      service: minio-server-service
+
+    omv:
+      entryPoints:
+        - "https"
+      rule: Host(`omv.local.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-service
+
+    omv-webtop:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-webtop\.(ts|local)\.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-webtop-service
+
+    omv-qbit:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-qbit\.(ts|local)\.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-qbit-service
+
+    omv-prowlarr:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-prowlarr\.(ts|local)\.{{ registerable_domain }}
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-prowlarr-service
+
+    omv-sonarr:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-sonarr\.(ts|local)\.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-sonarr-service
+
+    omv-radarr:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-radarr\.(ts|local)\.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-radarr-service
+
+    omv-radarr-russ:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-radarr-russ\.(ts|local)\.{{ registerable_domain }}$`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-radarr-russ-service
+
+    omv-lidarr:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-lidarr\.(ts|local)\.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-lidarr-service
+
+    omv-navidrome:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`omv-navidrome.local.{{ registerable_domain }}`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: omv-navidrome-service
+
+    omv-browser:
+      entryPoints:
+        - "https"
+      rule: Host(`omv-browser.local.{{ registerable_domain }}`)
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: omv-browser-service
+
+    reactiveresume:
+      rule: "Host(`reactive-resume.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls:
+        certresolver: porkbun
+      service: reactiveresume-service

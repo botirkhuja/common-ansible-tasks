@@ -4,14 +4,15 @@ pipeline {
     }
 
     options {
-        disableConcurrentBuilds()
-        timestamps()
+      disableConcurrentBuilds()
+      timestamps()
     }
 
     environment {
-        UBUNTU_WITH_GPU_PASS = credentials('ubuntu_with_gpu_pass')
-        // MOUNT_POINT = '/mnt/maindata'
-        // PARTITION_UUID = credentials('main-data-hdd-uuid')
+      UBUNTU_WITH_GPU_PASS = credentials('ubuntu_with_gpu_pass')
+      DOMAIN_PROVIDER_USER_ID = credentials('DOMAIN_PROVIDER_USER_ID')
+      PORKBUN_SECRET_API_KEY = credentials('PORKBUN_SECRET_API_KEY')
+      PORKBUN_API_KEY = credentials('PORKBUN_API_KEY')
     }
 
     parameters {
@@ -20,33 +21,34 @@ pipeline {
       // mount point
       // string(name: 'MOUNT_POINT', defaultValue: '/mnt/llms', description: 'The mount point.')
       string(name: 'HOSTS', defaultValue: '', description: 'The hosts to run the playbook on.')
-      choice(name: 'DEPLOYING_STACK', choices: ['ollama'], description: 'Choose the action to perform.')
+      choice(name: 'DEPLOYING_STACK', choices: ['traefik', 'ollama'], description: 'Choose the action to perform.')
+      string(name: 'registerable_domain', defaultValue: 'example.com', description: 'The domain to register.')
     }
 
     stages {
-        stage('Deploy docker apps') {
-            steps {
-              ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
-                  disableHostKeyChecking: true,
-                  // installation: 'ansible',
-                  // become: true,
-                //   sudoUser: 'botir',
-                  // becomeUser: 'botir',
-                  colorized: true,
-                  // forks: 2,
-                  // startAtTask: '004',
-                  tags: DEPLOYING_STACK,
-                  // vaultCredentialsId: 'external_hdd_uuid',
-                  // vaultTmpPath: '',
-                  inventory: 'inventory.yaml',
-                  playbook: 'playbook.yaml'
-            }
+      stage('Deploy docker apps') {
+        steps {
+          ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
+            disableHostKeyChecking: true,
+            // installation: 'ansible',
+            // become: true,
+            // sudoUser: 'botir',
+            // becomeUser: 'botir',
+            colorized: true,
+            // forks: 2,
+            // startAtTask: '004',
+            tags: DEPLOYING_STACK,
+            // vaultCredentialsId: 'external_hdd_uuid',
+            // vaultTmpPath: '',
+            inventory: 'inventory.yaml',
+            playbook: 'playbook.yaml'
         }
+      }
     }
 
     post {
-        always {
-            echo 'This will always run after the stages.'
-        }
+      always {
+        echo 'This will always run after the stages.'
+      }
     }
 }

@@ -38,7 +38,7 @@
 #       ansible_become_method: sudo
 #       ansible_ssh_private_key_file: ~/.ssh/ansible 
 
-usa4foryou-server:
+ubuntu-servers:
   hosts:
     usa4foryou-server:
       ansible_host: 192.168.50.87
@@ -46,17 +46,16 @@ usa4foryou-server:
       ansible_become: true
       ansible_become_method: sudo
 
-ubuntu-servers:
-  hosts:
     ubuntu-with-gpu:
       ansible_host: 192.168.50.208
       ansible_user: 'botir'
       ansible_become: true
       ansible_become_method: sudo
       ansible_become_pass: '{{ lookup("ansible.builtin.env", "UBUNTU_WITH_GPU_PASS_PSW") }}'
-    # test-ubuntu:
-    #   ansible_host: 192.168.50.227
-    #   ansible_user: 'ubuntu'
-    #   ansible_become: true
-    #   ansible_become_method: sudo
+
+    test-ubuntu:
+      ansible_host: 192.168.50.227
+      ansible_user: 'ubuntu'
+      ansible_become: true
+      ansible_become_method: sudo
     

@@ -1,0 +1,24 @@
+# learned from https://binarypatrick.dev/posts/traefik-over-tailscale/
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - 443:443
+      - 80:80
+    environment:
+      # Porkbun configs
+      - PORKBUN_API_KEY={{ porkbun_api_key }}
+      - PORKBUN_SECRET_API_KEY={{ porkbun_secret_api_key }}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/traefik.yml:/traefik.yml:ro
+      - ./data/acme.json:/acme.json
+      # - ./config.yml:/config.yml:ro
+      - ./configs:/configs:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.traefik.loadbalancer.server.port=1337"

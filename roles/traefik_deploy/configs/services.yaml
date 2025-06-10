@@ -1,0 +1,114 @@
+http:
+  services:
+    alist-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.208:5244"
+        passHostHeader: true
+
+    filebrowser-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.208:8090"
+        passHostHeader: true
+
+    homepage-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.211:6006"
+        passHostHeader: true
+
+    immich-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.208:2283"
+        passHostHeader: true
+
+    jellyfin-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.208:8096"
+        passHostHeader: true
+
+    jenkins-server-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.180:8080"
+        passHostHeader: true
+
+    minio-console-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.226:9001"
+        passHostHeader: true
+    minio-server-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.226:9000"
+        passHostHeader: true
+
+    omv-browser-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:3670"
+        passHostHeader: true
+
+    omv-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:80"
+        passHostHeader: true
+
+    omv-webtop-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:3010"
+        passHostHeader: true
+        
+    omv-qbit-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:8085"
+        passHostHeader: true
+        
+    omv-prowlarr-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:9696"
+        passHostHeader: true
+        
+    omv-sonarr-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:8989"
+        passHostHeader: true
+        
+    omv-radarr-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:7878"
+        passHostHeader: true
+        
+    omv-radarr-russ-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:7879"
+        passHostHeader: true
+        
+    omv-lidarr-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:8686"
+        passHostHeader: true
+        
+    omv-navidrome-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.45:4533"
+        passHostHeader: true
+
+    reactiveresume-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.150:3000"
+        passHostHeader: true

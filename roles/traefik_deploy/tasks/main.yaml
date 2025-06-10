@@ -1,0 +1,79 @@
+---
+- name: Check docker is present
+  ansible.builtin.import_role:
+    name: docker
+    tasks_from: check-docker
+
+- name: Setup traefik directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/docker-compose/traefik"
+    state: directory
+    mode: '0755'  # Optional file permissions
+    owner: {{ ansible_user_id }}  # Optional ownership
+    group: {{ ansible_user_id }}  # Optional group ownership
+
+- name: Setup traefik data directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/docker-compose/traefik/data"
+    state: directory
+    mode: '0755'  # Optional file permissions
+    owner: {{ ansible_user_id }}  # Optional ownership
+    group: {{ ansible_user_id }}  # Optional group ownership
+
+- name: Copy traefik routers configs
+  ansible.builtin.template:
+    src: "configs/a-routers.j2"
+    # Ensure the destination path is correct
+    dest: "{{ ansible_env.HOME }}/docker-compose/traefik/configs/a-routers.yaml"
+    mode: '0755'  # Optional file permissions
+    owner: {{ ansible_user_id }}  # Optional ownership
+    group: {{ ansible_user_id }}  # Optional group ownership
+
+- name: Copy traefik middlewares configs
+  ansible.builtin.template:
+    src: "configs/middlewares.j2"
+    # Ensure the destination path is correct
+    dest: "{{ ansible_env.HOME }}/docker-compose/traefik/configs/middlewares.yaml"
+    mode: '0755'  # Optional file permissions
+    owner: {{ ansible_user_id }}  # Optional ownership
+    group: {{ ansible_user_id }}  # Optional group ownership
+
+- name: Copy traefik services config
+  ansible.builtin.copy:
+    src: "configs/services.yaml"
+    # Ensure the destination path is correct
+    dest: "{{ ansible_env.HOME }}/docker-compose/traefik/configs/services.yaml"
+    mode: '0755'  # Optional file permissions
+    owner: {{ ansible_user_id }}  # Optional ownership
+    group: {{ ansible_user_id }}  # Optional group ownership
+
+- name: Copy traefik yaml file
+  ansible.builtin.template:
+    src: templates/traefik.yml.j2
+    dest: "{{ ansible_env.HOME }}/docker-compose/traefik/data/traefik.yml"
+    mode: '0755'  # Optional file permissions
+    owner: {{ ansible_user_id }}  # Optional ownership
+    group: {{ ansible_user_id }}  # Optional group ownership
+
+- name: Copy acme.json file to remote host
+  ansible.builtin.copy:
+    src: data/acme.json
+    dest: "{{ ansible_env.HOME }}/docker-compose/traefik/data/acme.json"
+    mode: '0600'  # Optional file permissions
+    force: no
+    backup: true
+
+- name: Copy traefik Docker Compose file and notify compose
+  ansible.builtin.template:
+    src: "templates/docker_compose.yaml.j2"
+    dest: "{{ ansible_env.HOME }}/docker-compose/traefik/docker-compose.yaml"
+    mode: '0755'  # Optional file permissions
+    owner: ubuntu  # Optional ownership
+    group: ubuntu  # Optional group ownership
+#   notify:
+#     - Start Docker Compose
+
+# - name: Run traefik docker-compose up
+#   community.docker.docker_compose_v2:
+#     project_src: "{{ ansible_env.HOME }}/docker-compose/traefik"
+#     state: present
