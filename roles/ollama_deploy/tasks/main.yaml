@@ -1,7 +1,7 @@
 ---
 - name: Check docker is present
   ansible.builtin.import_role:
-    name: docker
+    name: common
     tasks_from: check-docker
 
 - name: Setup Ollama directory

@@ -110,3 +110,7 @@
       tags:
         - never
         - traefik
+    - role: docker_install
+      tags:
+        - never
+        - docker-install
