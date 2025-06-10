@@ -21,7 +21,7 @@ pipeline {
       // mount point
       // string(name: 'MOUNT_POINT', defaultValue: '/mnt/llms', description: 'The mount point.')
       string(name: 'HOSTS', defaultValue: '', description: 'The hosts to run the playbook on.')
-      choice(name: 'DEPLOYING_STACK', choices: ['traefik', 'ollama'], description: 'Choose the action to perform.')
+      choice(name: 'DEPLOYING_STACK', choices: ['traefik', 'docker_install', 'ollama'], description: 'Choose the action to perform.')
       string(name: 'registerable_domain', defaultValue: 'example.com', description: 'The domain to register.')
     }
 
