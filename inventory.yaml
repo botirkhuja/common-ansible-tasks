@@ -54,7 +54,7 @@ ubuntu-servers:
       ansible_become_pass: '{{ lookup("ansible.builtin.env", "UBUNTU_WITH_GPU_PASS_PSW") }}'
 
     test-ubuntu:
-      ansible_host: 192.168.50.227
+      ansible_host: 192.168.50.207
       ansible_user: 'ubuntu'
       ansible_become: true
       ansible_become_method: sudo
