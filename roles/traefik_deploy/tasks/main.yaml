@@ -92,10 +92,10 @@
     mode: '0755'  # Optional file permissions
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-#   notify:
-#     - Restart Docker Compose
+  notify:
+    - Restart Docker Compose
 
-# - name: Run traefik docker-compose up
-#   community.docker.docker_compose_v2:
-#     project_src: "{{ ansible_env.PWD }}/docker-compose/traefik"
-#     state: present
+- name: Run traefik docker-compose up
+  community.docker.docker_compose_v2:
+    project_src: "{{ ansible_env.PWD }}/docker-compose/traefik"
+    state: present
