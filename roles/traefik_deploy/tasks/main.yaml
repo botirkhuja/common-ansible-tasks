@@ -20,6 +20,14 @@
     owner: "{{ ansible_user_id }}"  # Optional ownership
     group: "{{ ansible_user_id }}"  # Optional group ownership
 
+- name: Setup traefik configs directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/docker-compose/traefik/configs"
+    state: directory
+    mode: '0755'  # Optional file permissions
+    owner: "{{ ansible_user_id }}"  # Optional ownership
+    group: "{{ ansible_user_id }}"  # Optional group ownership
+
 - name: Copy traefik routers configs
   ansible.builtin.template:
     src: "configs/a-routers.j2"

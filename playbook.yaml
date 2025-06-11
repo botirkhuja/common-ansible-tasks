@@ -67,7 +67,7 @@
 #         - jenkins-agent
 
 - hosts: "{{ lookup('ansible.builtin.env', 'HOSTS') }}"
-  become: true
+  # become: true
   gather_facts: true
   vars:
     mount_point: "{{ lookup('ansible.builtin.env', 'MOUNT_POINT') }}"
