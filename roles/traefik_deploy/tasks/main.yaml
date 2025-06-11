@@ -91,7 +91,7 @@
     owner: ubuntu  # Optional ownership
     group: ubuntu  # Optional group ownership
   notify:
-    - Start Docker Compose
+    - Restart Docker Compose
 
 - name: Run traefik docker-compose up
   community.docker.docker_compose_v2:
