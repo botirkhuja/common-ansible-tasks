@@ -148,7 +148,7 @@ http:
     omv-radarr:
       entryPoints:
         - "https"
-      rule: HostRegexp(`omv-radarr\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$
+      rule: HostRegexp(`omv-radarr\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$`)
       middlewares:
         - https-redirectscheme
         - default-headers
@@ -158,7 +158,7 @@ http:
     omv-radarr-russ:
       entryPoints:
         - "https"
-      rule: HostRegexp(`omv-radarr-russ\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$
+      rule: HostRegexp(`omv-radarr-russ\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$`)
       middlewares:
         - https-redirectscheme
         - default-headers
@@ -168,7 +168,7 @@ http:
     omv-lidarr:
       entryPoints:
         - "https"
-      rule: HostRegexp(`omv-lidarr\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$
+      rule: HostRegexp(`omv-lidarr\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$`)
       middlewares:
         - https-redirectscheme
         - default-headers
@@ -178,7 +178,7 @@ http:
     omv-navidrome:
       entryPoints:
         - "https"
-      rule: HostRegexp(`omv-navidrome.local.{{ registerable_domain | replace(".", "\.") }}$
+      rule: HostRegexp(`omv-navidrome\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$`)
       middlewares:
         - https-redirectscheme
         - default-headers
