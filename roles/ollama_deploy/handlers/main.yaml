@@ -1,5 +1,5 @@
 ---
 - name: Start ollama
   community.docker.docker_compose_v2:
-    project_src: "{{ ansible_env.HOME }}/docker-compose/ollama"
+    project_src: "{{ ansible_env.PWD }}/docker-compose/ollama"
     state: restarted
