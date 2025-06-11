@@ -12,9 +12,9 @@
     owner: "{{ ansible_user_id }}"  # Optional ownership
     group: "{{ ansible_user_id }}"  # Optional group ownership
 
-# - name: print ansible environment variables
-#   ansible.builtin.debug:
-#     var: ansible_env
+- name: print ansible environment variables
+  ansible.builtin.debug:
+    var: ansible_env
 
 # - name: print ansible facts
 #   ansible.builtin.debug:
