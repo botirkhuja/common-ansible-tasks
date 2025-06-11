@@ -72,8 +72,7 @@ http:
         - "https"
       middlewares:
         - https-redirectscheme
-      tls:
-        certresolver: porkbun
+      tls: {}
       service: jenkins-server-service
 
     minio-console:
@@ -82,8 +81,7 @@ http:
         - "https"
       middlewares:
         - https-redirectscheme
-      tls:
-        certresolver: porkbun
+      tls: {}
       service: minio-console-service
 
     minio-server:
@@ -92,8 +90,7 @@ http:
         - "https"
       middlewares:
         - https-redirectscheme
-      tls:
-        certresolver: porkbun
+      tls: {}
       service: minio-server-service
 
     omv:
@@ -202,6 +199,5 @@ http:
         - "https"
       middlewares:
         - https-redirectscheme
-      tls:
-        certresolver: porkbun
+      tls: {}
       service: reactiveresume-service
