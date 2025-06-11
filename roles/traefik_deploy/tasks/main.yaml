@@ -9,8 +9,8 @@
     path: "{{ ansible_env.HOME }}/docker-compose/traefik"
     state: directory
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: print ansible environment variables
   ansible.builtin.debug:
@@ -29,16 +29,16 @@
     path: "{{ ansible_env.PWD }}/docker-compose/traefik/data"
     state: directory
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: Setup traefik configs directory
   ansible.builtin.file:
     path: "{{ ansible_env.PWD }}/docker-compose/traefik/configs"
     state: directory
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: Copy traefik routers configs
   ansible.builtin.template:
@@ -46,8 +46,8 @@
     # Ensure the destination path is correct
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/a-routers.yaml"
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: Copy traefik middlewares configs
   ansible.builtin.template:
@@ -55,8 +55,8 @@
     # Ensure the destination path is correct
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/middlewares.yaml"
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: Copy traefik services config
   ansible.builtin.copy:
@@ -64,22 +64,24 @@
     # Ensure the destination path is correct
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/services.yaml"
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: Copy traefik yaml file
   ansible.builtin.template:
     src: templates/traefik.yml.j2
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/traefik.yml"
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_user_id }}"  # Optional ownership
-    group: "{{ ansible_user_id }}"  # Optional group ownership
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - name: Copy acme.json file to remote host
   ansible.builtin.copy:
     src: data/acme.json
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/acme.json"
     mode: '0600'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
     force: no
     backup: true
 
@@ -88,12 +90,12 @@
     src: "templates/docker_compose.yaml.j2"
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/docker-compose.yaml"
     mode: '0755'  # Optional file permissions
-    owner: ubuntu  # Optional ownership
-    group: ubuntu  # Optional group ownership
-  notify:
-    - Restart Docker Compose
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+#   notify:
+#     - Restart Docker Compose
 
-- name: Run traefik docker-compose up
-  community.docker.docker_compose_v2:
-    project_src: "{{ ansible_env.PWD }}/docker-compose/traefik"
-    state: present
+# - name: Run traefik docker-compose up
+#   community.docker.docker_compose_v2:
+#     project_src: "{{ ansible_env.PWD }}/docker-compose/traefik"
+#     state: present
