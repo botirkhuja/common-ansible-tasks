@@ -19,7 +19,7 @@ pipeline {
                   // becomeUser: 'botir',
                   colorized: true,
                   inventory: 'inventory.yaml',
-                  playbook: 'install-qemu.yaml',
+                  playbook: 'install-qemu.yaml'
                   // forks: 2,
                   // startAtTask: '004',
                   // vaultCredentialsId: 'external_hdd_uuid',
