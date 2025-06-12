@@ -4,7 +4,7 @@ services:
     image: ghcr.io/gethomepage/homepage:v1
     container_name: homepage
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS={{ registerable_domain }},{{ ansible_facts.default_ipv4.address:6006 }},
+      - HOMEPAGE_ALLOWED_HOSTS="{{ registerable_domain }},{{ ansible_facts.default_ipv4.address\:6006 }}"
       #PUID: 1000 -- optional, your user id
       #PGID: 1000 -- optional, your group id
     ports:
