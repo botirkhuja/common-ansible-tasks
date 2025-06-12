@@ -1,71 +1,23 @@
 ---
-- name: Check docker is present
-  ansible.builtin.import_role:
+- ansible.builtin.import_role:
     name: common
     tasks_from: check-docker
 
-- name: Setup traefik directory
-  ansible.builtin.file:
-    path: "{{ ansible_env.PWD }}/docker-compose/traefik"
-    state: directory
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: create-compose-directory
 
-- name: print ansible user id
-  ansible.builtin.debug:
-    var: ansible_user_id
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: create-compose-directory
+  vars:
+    given_directory: traefik/data
 
-- name: Setup traefik data directory
-  ansible.builtin.file:
-    path: "{{ ansible_env.PWD }}/docker-compose/traefik/data"
-    state: directory
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-
-- name: Setup traefik configs directory
-  ansible.builtin.file:
-    path: "{{ ansible_env.PWD }}/docker-compose/traefik/configs"
-    state: directory
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-
-- name: Copy traefik routers configs
-  ansible.builtin.template:
-    src: "configs/a-routers.j2"
-    # Ensure the destination path is correct
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/a-routers.yaml"
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-
-- name: Copy traefik middlewares configs
-  ansible.builtin.template:
-    src: "configs/middlewares.j2"
-    # Ensure the destination path is correct
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/middlewares.yaml"
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-
-- name: Copy traefik services config
-  ansible.builtin.copy:
-    src: "configs/services.yaml"
-    # Ensure the destination path is correct
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/services.yaml"
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-
-- name: Copy traefik yaml file
-  ansible.builtin.template:
-    src: templates/traefik.yml.j2
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/traefik.yml"
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: create-compose-directory
+  vars:
+    given_directory: traefik/configs
 
 - name: Copy acme.json file to remote host
   ansible.builtin.copy:
@@ -77,17 +29,13 @@
     force: no
     backup: true
 
-- name: Copy traefik Docker Compose file and notify compose
-  ansible.builtin.template:
-    src: "templates/docker_compose.yaml.j2"
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/docker-compose.yaml"
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-  notify:
-    - Restart Docker Compose
+- ansible.builtin.import_tasks:
+    file: copy_files.yaml
 
-- name: Run traefik docker-compose up
-  community.docker.docker_compose_v2:
-    project_src: "{{ ansible_env.PWD }}/docker-compose/traefik"
-    state: present
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: copy-compose-file
+
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: compose-up
