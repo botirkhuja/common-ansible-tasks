@@ -74,6 +74,7 @@
     disk_device: "/dev/{{ lookup('ansible.builtin.env', 'DISK_NAME') }}"
     partition_device: "/dev/{{ lookup('ansible.builtin.env', 'PARTITION_NAME') }}"
     partition_uuid: "{{ lookup('ansible.builtin.env', 'PARTITION_UUID') }}"
+    registerable_domain: "{{ lookup('ansible.builtin.env', 'REGISTERABLE_DOMAIN') }}"
   roles:
     - role: unmount_drive_by_uuid
       tags: 
