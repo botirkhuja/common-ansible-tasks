@@ -1,6 +1,10 @@
 ---
 - ansible.builtin.import_role:
     name: common
+    tasks_from: check-docker
+    
+- ansible.builtin.import_role:
+    name: common
     tasks_from: create-compose-directory
 
 - ansible.builtin.import_role:

@@ -1,4 +1,0 @@
-dependencies:
-  - import_role:
-      name: common
-      tasks_from: check-docker
