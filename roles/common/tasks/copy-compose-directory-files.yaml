@@ -1,7 +1,7 @@
 - name: Copy homepage config folder to remote host
   ansible.builtin.copy:
     src: "{{ src_folder }}"
-    dest: "{{ ansible_env.HOME }}/docker-compose/{{ given_directory }}"
+    dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
     mode: '0755'  # Optional file permissions
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
