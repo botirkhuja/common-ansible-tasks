@@ -1,5 +1,5 @@
 ---
-- name: "Setup {{ given_directory }} directory"
+- name: "Create {{ given_directory }} directory"
   ansible.builtin.file:
     path: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
     state: directory
