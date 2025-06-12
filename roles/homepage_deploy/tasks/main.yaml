@@ -10,8 +10,8 @@
 - ansible.builtin.import_role:
     name: common
     tasks_from: create-compose-directory
-    vars:
-      given_directory: homepage/config
+  vars:
+    given_directory: homepage/config
 
 - name: Copy services file
   ansible.builtin.template:
