@@ -1,5 +1,10 @@
 ---
-- name: Run docker-compose up
+- name: Run docker compose up
   community.docker.docker_compose_v2:
     project_src: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
     state: present
+  register: compose_up_result
+- name: Debug compose up result
+  ansible.builtin.debug:
+    msg: "Docker Compose up result: {{ compose_up_result }}"
+  when: compose_up_result is defined

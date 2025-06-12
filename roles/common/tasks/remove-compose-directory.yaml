@@ -1,0 +1,10 @@
+---
+- name: "Remove {{ given_directory }} directory"
+  ansible.builtin.file:
+    path: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
+    state: absent
+  register: remove_directory_result
+- name: Debug remove directory result
+  ansible.builtin.debug:
+    msg: "Remove directory result: {{ remove_directory_result }}"
+  when: remove_directory_result is defined

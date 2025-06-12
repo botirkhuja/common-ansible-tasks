@@ -1,0 +1,10 @@
+---
+- name: Run docker compose down
+  community.docker.docker_compose_v2:
+    project_src: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
+    state: absent
+  register: compose_down_result
+- name: Debug compose down result
+  ansible.builtin.debug:
+    msg: "Docker Compose down result: {{ compose_down_result }}"
+  when: compose_down_result is defined
