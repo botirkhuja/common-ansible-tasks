@@ -1,4 +1,4 @@
-- name: Copy homepage config folder to remote host
+- name: "Copy {{ src_folder }} folder to remote host {{ given_directory }} directory"
   ansible.builtin.copy:
     src: "{{ src_folder }}"
     dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
