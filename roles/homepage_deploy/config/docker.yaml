@@ -1,0 +1,19 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/docker/
+
+# my-docker:
+#   host: 127.0.0.1
+#   port: 2375
+
+my-docker:
+  host: 192.168.50.27
+  port: 2375
+
+my-remote-docker:
+  host: 192.168.50.219
+  port: 2375
+
+immich-docker:
+  host: 192.168.50.53
+  port: 2375

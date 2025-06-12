@@ -1,0 +1,26 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/settings
+
+target: _self
+showStats: true
+instanceName: public
+# background: 
+#   image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+#   blur: xs # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+#   saturate: 200 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+#   brightness: 75 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+#   opacity: 30 # 0-100
+# cardBlur: md
+layout:
+  Servers:
+    icon: servarr.svg
+    style: row
+    columns: 3
+  Entertainment:
+    icon: universal-media-server.png
+    style: row
+    columns: 3
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey

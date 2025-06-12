@@ -1,0 +1,199 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+# icons https://github.com/walkxcode/dashboard-icons/blob/main/README.md#-icons
+
+- Servers:
+    - Proxmox Downstairs:
+        href: https://192.168.50.113:8006
+        description: Proxmox located downstairs
+        icon: proxmox.svg
+        ping: 192.168.50.113:8006
+        siteMonitor: https://192.168.50.113:8006
+    - Proxmox ROG:
+        href: https://proxmox.local.{{ registerable_domain }}
+        description: Proxmox on Asus ROG
+        icon: proxmox.svg
+        ping: 192.168.50.4:8006
+        siteMonitor: https://proxmox.local.{{ registerable_domain }}
+    - Proxmox Backup:
+        href: https://192.168.50.133:8007
+        description: Proxmox buckup service
+        icon: proxmox.svg
+        ping: 192.168.50.133:8007
+        siteMonitor: https://192.168.50.133:8007
+    - Portainer:
+        href: https://192.168.50.219:9443/#!/2/docker/containers
+        description: Docker With Portainer
+        icon: portainer.svg
+        ping: 192.168.50.219:9443
+        siteMonitor: https://192.168.50.219:9443
+        server: my-remote-docker
+        container: portainer
+    - Authentik Console:
+        href: https://authen.{{ registerable_domain }}
+        description: Authentik Single Sign On service
+        icon: authentik.png
+        siteMonitor: https://authen.{{ registerable_domain }}
+    - Pi-Hole:
+        href: http://192.168.50.212:85/admin
+        description: Pi-hole ad blocker
+        icon: pi-hole.svg
+        ping: 192.168.50.212
+        siteMonitor: http://192.168.50.212:85/admin
+    - Traefik Local Dashboard:
+        href: https://traefik-dashboard.local.{{ registerable_domain }}
+        description: Load balancer and reverse proxy for incomming traffic
+        icon: traefik.svg
+        ping: traefik-dashboard.local.{{ registerable_domain }}
+        siteMonitor: https://traefik-dashboard.local.{{ registerable_domain }}
+- Entertainment:
+    - Jellyfin:
+        href: https://jellyfin.local.{{ registerable_domain }}
+        description: OMV Qbittorrent for entertainment media
+        icon: jellyfin.svg
+        ping: 192.168.50.208
+        siteMonitor: http://192.168.50.208:8096
+    - OMV Qbittorrent:
+        href: https://omv-qbit.local.{{ registerable_domain }}
+        description: OMV Qbittorrent for entertainment media
+        icon: qbittorrent.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:8085
+    - OMV Prowlarr:
+        href: https://omv-prowlarr.local.{{ registerable_domain }}
+        description: OMV Prowlarr indexer for entertainment media
+        icon: prowlarr.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:9696
+    - OMV Sonarr:
+        href: https://omv-sonarr.local.{{ registerable_domain }}
+        description: OMV Sonar TV Show finder for entertainment media
+        icon: sonarr.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:8989
+    - OMV Radarr:
+        href: https://omv-radarr.local.{{ registerable_domain }}
+        description: OMV Radarr movies finder for entertainment media
+        icon: radarr.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:7878
+    - OMV Radarr for Russian:
+        href: https://omv-radarr-russ.local.{{ registerable_domain }}
+        description: OMV Radarr movies finder for entertainment media
+        icon: radarr.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:7879
+    - OMV Lidarr:
+        href: https://omv-lidarr.local.{{ registerable_domain }}
+        description: OMV Lidarr music finder for entertainment media
+        icon: lidarr.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:8686
+    - OMV Navidrome:
+        href: https://omv-navidrome.local.{{ registerable_domain }}
+        description: OMV music server
+        icon: navidrome.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:4533
+        
+- Desktops on Web:
+    - OMV Webtop:
+        href: https://omv-webtop.local.{{ registerable_domain }}
+        description: OMV Webtop for entertainment media
+        icon: webtop.png
+        ping: 192.168.50.208
+        siteMonitor: http://192.168.50.208:3010
+    - Apache Guacemole:
+        href: https://guacamole.local.{{ registerable_domain }}
+        description: Cross-platform, clientless remote desktop gateway. 
+        icon: guacamole.svg
+        ping: guacamole.local.{{ registerable_domain }}
+        siteMonitor: https://guacamole.botirs.{{ registerable_domain }}
+
+- Services:
+    - Invoice Ninja:
+        href: https://invoice-ninja.local.{{ registerable_domain }}
+        description: Invoice management for business
+        icon: invoiceninja.svg
+        ping: https://invoice-ninja.local.{{ registerable_domain }}
+        siteMonitor: https://invoice-ninja.local.{{ registerable_domain }}
+        server: my-remote-docker
+        container: invoiceninja-server-1
+    - DDNS Updated:
+        href: http://192.168.50.219:8001
+        description: DDNS Ip Address Updater Service
+        icon: ddns-updater.svg
+        ping: 192.168.50.219:8001
+        siteMonitor: http://192.168.50.219:8001 
+        server: my-remote-docker
+        container: ddns-updater
+    - Reactive Resume:
+        href: https://reactive-resume.local.{{ registerable_domain }}
+        description: My Resumes for job applications
+        icon: reactive-resume.svg
+        ping: 192.168.50.150:3000
+        siteMonitor: http://192.168.50.150:3000
+
+
+- Development:
+    - Jenkins:
+        href: https://jenkins.local.{{ registerable_domain }}
+        description: Continuous integration and deployment
+        icon: jenkins.svg
+        ping: 192.168.50.180:8080
+        siteMonitor: https://jenkins.local.{{ registerable_domain }}
+    - Min.io Console:
+        href: https://console-minios3.local.{{ registerable_domain }}
+        description: Min.IO S3 Object Storage
+        icon: minio.svg
+        ping: 192.168.50.226:9001
+        siteMonitor: http://192.168.50.226:9001
+    - Forgejo:
+        href: https://forgejo.local.{{ registerable_domain }}
+        description: Lightweight software forge.
+        icon: forgejo.svg
+        ping: forgejo.local.{{ registerable_domain }}
+        siteMonitor: https://forgejo.local.{{ registerable_domain }}
+
+
+- Cloud Storage:
+    - A List Files:
+        href: https://alist.local.{{ registerable_domain }}
+        description: List of files on personal cloud
+        icon: alist.svg
+        ping: 192.168.50.208:5244
+        siteMonitor: http://192.168.50.208:5244
+    - File Browser:
+        href: https://filebrowser.local.{{ registerable_domain }}
+        description: Personal File Browser
+        icon: filebrowser.svg
+        ping: 192.168.50.208:8090
+        siteMonitor: http://192.168.50.208:8090
+    - Immich on Local:
+        href: https://immich.local.{{ registerable_domain }}
+        description: Immich Photo Album
+        icon: immich.svg
+        ping: 192.168.50.208
+        siteMonitor: https://immich.local.{{ registerable_domain }}
+        server: immich-docker
+        container: immich_server
+    - Open Media Vault:
+        href: https://omv.local.{{ registerable_domain }}
+        description: Open Media Vault for entertainment media
+        icon: openmediavault.svg
+        ping: 192.168.50.45
+        siteMonitor: http://192.168.50.45:80
+    - Open Media Vault File Browser:
+        href: https://omv-browser.local.{{ registerable_domain }}
+        description: Open Media Vault for entertainment media
+        icon: filebrowser.svg
+        ping: 192.168.50.45:3670
+        siteMonitor: http://192.168.50.45:3670
+    - Min.io Storage:
+        href: https://minios3.local.{{ registerable_domain }}
+        description: Min.IO S3 Object Storage
+        icon: minio.svg
+        ping: 192.168.50.226:9000
+        siteMonitor: http://192.168.50.226:9000
+        

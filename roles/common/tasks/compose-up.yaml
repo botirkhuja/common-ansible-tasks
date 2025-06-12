@@ -1,0 +1,5 @@
+---
+- name: Run docker-compose up
+  community.docker.docker_compose_v2:
+    project_src: "{{ ansible_env.HOME }}/docker-compose/{{ given_directory }}"
+    state: present

@@ -102,6 +102,10 @@
       tags: 
         - never
         - unmount_by_partition
+    - role: docker_install
+      tags:
+        - never
+        - docker-install
     - role: ollama_deploy
       tags:
         - never
@@ -110,7 +114,7 @@
       tags:
         - never
         - traefik
-    - role: docker_install
+    - role: homepage_deploy
       tags:
         - never
-        - docker-install
+        - homepage

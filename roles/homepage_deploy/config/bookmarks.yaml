@@ -1,0 +1,41 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/bookmarks
+
+- Developer:
+  - Github:
+    - abbr: GH
+      href: https://github.com/
+  - Namecheap:
+    - abbr: NC
+      href: https://ap.www.namecheap.com/
+  - Proxmox Scripts:
+    - abbr: PS
+      href: https://tteck.github.io/Proxmox/
+  - Dashboard Logos:
+    - abbr: DLG
+      href: https://github.com/walkxcode/dashboard-icons/blob/main/README.md#-icons
+  - Docker Install:
+    - href: https://docs.docker.com/engine/install/debian/
+  
+- Documents:
+  - Traefik:
+    - abbr: TF
+      href: https://doc.traefik.io/traefik/
+  - Proton Mail:
+    - abbr: eMail
+      href: https://mail.proton.me/u/2/inbox
+  - Simple Login:
+    - abbr: SLgn
+      href: https://app.simplelogin.io/dashboard/
+
+
+- Social:
+    - Reddit:
+        - abbr: RE
+          href: https://reddit.com/
+
+- Entertainment:
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com/
