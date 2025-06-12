@@ -1,0 +1,13 @@
+- name: Copy homepage config files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0755'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+  loop:
+    - { src: 'config/services.j2', dest: '{{ ansible_env.PWD }}/docker-compose/homepage/config/services.yaml' }
+
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: copy-compose-directory-files

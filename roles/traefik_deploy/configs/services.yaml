@@ -15,7 +15,7 @@ http:
     homepage-svc:
       loadBalancer:
         servers:
-          - url: "http://192.168.50.211:6006"
+          - url: "http://192.168.50.87:6006"
         passHostHeader: true
 
     immich-service:

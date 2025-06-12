@@ -1,0 +1,33 @@
+pipeline {
+    agent {
+      label 'jenkins-ubuntu-agent'
+    }
+
+    environment {
+      UBUNTU_WITH_GPU_PASS = credentials('ubuntu_with_gpu_pass')
+      DOMAIN_PROVIDER_USER_ID = credentials('DOMAIN_PROVIDER_USER_ID')
+      PORKBUN_SECRET_API_KEY = credentials('PORKBUN_SECRET_API_KEY')
+      PORKBUN_API_KEY = credentials('PORKBUN_API_KEY')
+      REGISTERABLE_DOMAIN = credentials('REGISTERABLE_DOMAIN')
+    }
+
+    stages {
+        stage('Run Copy files Playbook') {
+            steps {
+              ansiblePlaybook credentialsId: 'jenkins-agent-ansible-generated-key',
+                  disableHostKeyChecking: true,
+                  // installation: 'ansible',
+                  // become: true,
+                //   sudoUser: 'botir',
+                  // becomeUser: 'botir',
+                  colorized: true,
+                  inventory: 'inventory.yaml',
+                  playbook: 'copy-files-playbook.yaml'
+                  // forks: 2,
+                  // startAtTask: '004',
+                  // vaultCredentialsId: 'external_hdd_uuid',
+                  // vaultTmpPath: ''
+            }
+        }
+    }
+}

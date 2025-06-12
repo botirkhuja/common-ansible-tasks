@@ -13,17 +13,8 @@
   vars:
     given_directory: homepage/config
 
-- name: Copy services file
-  ansible.builtin.template:
-    src: "config/services.j2"
-    dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/config/services.yaml"
-    mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-
-- ansible.builtin.import_role:
-    name: common
-    tasks_from: copy-compose-directory-files
+- ansible.builtin.import_tasks:
+    file: copy_files.yaml
 
 - ansible.builtin.import_role:
     name: common
