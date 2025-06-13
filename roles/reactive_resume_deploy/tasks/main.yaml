@@ -3,24 +3,23 @@
     name: common
     tasks_from: check-docker
 
-# - ansible.builtin.import_role:
-#     name: common
-#     tasks_from: create-compose-directory
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: create-compose-directory
 
-# - ansible.builtin.import_role:
-#     name: common
-#     tasks_from: copy-compose-file
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: copy-compose-file
 
-- name: Log environment variables
-  ansible.builtin.debug:
-    msg: "{{lookup('ansible.builtin.file', env_file_location)}}"
+- name: Copy environment file to remote host
+  ansible.builtin.copy:
+    src: "{{ env_file_location }}"
+    dest: "{{ ansible_env.PWD }}/docker-compose/{{given_directory}}/env"
+    mode: '0644'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+    force: no
+    backup: true
   vars:
     env_file_location: "{{lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE')}}" 
    
-
-- name: check environment variables
-  ansible.builtin.assert:
-    that:
-      - ansible_env.PWD is defined
-      - ansible_env.SUDO_USER is defined
-    fail_msg: "Required environment variables are not set: PWD or SUDO_USER"
