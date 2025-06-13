@@ -201,3 +201,21 @@ http:
         - https-redirectscheme
       tls: {}
       service: reactiveresume-service
+
+    syncthing:
+      rule: "Host(`syncthing.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls: {}
+      service: syncthing-service
+
+    pihole:
+      rule: "Host(`pihole.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls: {}
+      service: pihole-service

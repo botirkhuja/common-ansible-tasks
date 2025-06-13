@@ -112,3 +112,15 @@ http:
         servers:
           - url: "http://192.168.50.150:3000"
         passHostHeader: true
+
+    syncthing-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.208:8384"
+        passHostHeader: true
+
+    pihole-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.110"
+        passHostHeader: true

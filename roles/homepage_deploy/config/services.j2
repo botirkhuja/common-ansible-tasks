@@ -36,17 +36,23 @@
         icon: authentik.png
         siteMonitor: https://authen.{{ registerable_domain }}
     - Pi-Hole:
-        href: http://192.168.50.212:85/admin
+        href: https://pihole.local.{{ registerable_domain }}/admin
         description: Pi-hole ad blocker
         icon: pi-hole.svg
-        ping: 192.168.50.212
-        siteMonitor: http://192.168.50.212:85/admin
+        ping: 192.168.50.110
+        siteMonitor: http://192.168.50.110:80/admin
     - Traefik Local Dashboard:
         href: https://traefik-dashboard.local.{{ registerable_domain }}
         description: Load balancer and reverse proxy for incomming traffic
         icon: traefik.svg
         ping: traefik-dashboard.local.{{ registerable_domain }}
         siteMonitor: https://traefik-dashboard.local.{{ registerable_domain }}
+    - Syncthing Server:
+        href: https://syncthing.local.{{ registerable_domain }}
+        description: Syncthing for file synchronization
+        icon: syncthing.svg
+        siteMonitor: https://syncthing.local.{{ registerable_domain }}
+
 - Entertainment:
     - Jellyfin:
         href: https://jellyfin.local.{{ registerable_domain }}
