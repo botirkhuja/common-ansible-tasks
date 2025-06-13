@@ -31,7 +31,7 @@
         server: my-remote-docker
         container: portainer
     - Authentik Console:
-        href: https://authen.{{ registerable_domain }}
+        href: https://authen.local.{{ registerable_domain }}
         description: Authentik Single Sign On service
         icon: authentik.png
         siteMonitor: https://authen.{{ registerable_domain }}
@@ -115,7 +115,7 @@
         description: Cross-platform, clientless remote desktop gateway. 
         icon: guacamole.svg
         ping: guacamole.local.{{ registerable_domain }}
-        siteMonitor: https://guacamole.botirs.{{ registerable_domain }}
+        siteMonitor: https://guacamole.local.{{ registerable_domain }}
 
 - Services:
     - Invoice Ninja:
