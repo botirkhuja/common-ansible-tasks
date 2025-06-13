@@ -6,7 +6,7 @@
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
   loop:
-    - { src: 'config/services.j2', dest: '{{ ansible_env.PWD }}/docker-compose/homepage/config/services.yaml' }
+    - { src: 'config/services.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{given_directory}}/config/services.yaml' }
 
 - ansible.builtin.import_role:
     name: common
