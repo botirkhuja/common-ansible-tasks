@@ -1,10 +1,6 @@
 ---
 - ansible.builtin.import_role:
     name: common
-    tasks_from: check-docker
-
-- ansible.builtin.import_role:
-    name: common
     tasks_from: create-compose-directory
 
 - ansible.builtin.import_role:
@@ -18,16 +14,6 @@
     tasks_from: create-compose-directory
   vars:
     given_directory: traefik/configs
-
-- name: Copy acme.json file to remote host
-  ansible.builtin.copy:
-    src: data/acme.json
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/acme.json"
-    mode: '0600'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-    force: no
-    backup: true
 
 - ansible.builtin.import_tasks:
     file: copy_files.yaml

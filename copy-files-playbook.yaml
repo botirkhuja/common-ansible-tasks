@@ -5,9 +5,9 @@
   tasks:
     - name: Copy homepage files
       ansible.builtin.import_role:
-        name: homepage_deploy
+        name: homepage
         tasks_from: copy_files
     - name: Copy traefik files
       ansible.builtin.import_role:
-        name: traefik_deploy
+        name: traefik
         tasks_from: copy_files

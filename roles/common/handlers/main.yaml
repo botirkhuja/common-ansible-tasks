@@ -1,5 +1,5 @@
 ---
-- name: Start Docker Compose
+- name: Restart Docker Compose
   community.docker.docker_compose_v2:
     project_src: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
     state: restarted

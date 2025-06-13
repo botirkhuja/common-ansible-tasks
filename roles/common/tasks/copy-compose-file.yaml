@@ -7,4 +7,4 @@
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
   notify:
-    - Start Docker Compose
+    - Retart Docker Compose

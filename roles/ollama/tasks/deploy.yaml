@@ -1,0 +1,11 @@
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: create-compose-directory
+
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: copy-compose-file
+
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: compose-up
