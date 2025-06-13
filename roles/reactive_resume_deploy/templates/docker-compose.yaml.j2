@@ -14,7 +14,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     env_file:
-      - env
+      - .env
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 10s
@@ -40,6 +40,8 @@ services:
     depends_on:
       - postgres
       - chrome
+    env_file:
+      - .env      
     environment:
       # -- Environment Variables --
       PORT: 3000
