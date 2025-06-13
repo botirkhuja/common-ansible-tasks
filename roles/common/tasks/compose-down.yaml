@@ -3,6 +3,7 @@
   community.docker.docker_compose_v2:
     project_src: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}"
     state: absent
+    remove_images: "all"
   register: compose_down_result
 - name: Debug compose down result
   ansible.builtin.debug:

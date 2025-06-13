@@ -56,7 +56,7 @@ services:
       CHROME_URL: ws://chrome:3000
 
       # -- Database (Postgres) --
-      DATABASE_URL: postgresql://botirdbadmin:pTY^c35GhgZ*wN8dh2aad@postgres:5432/postgres
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/postgres
 
       # -- Auth --
       # ACCESS_TOKEN_SECRET: access_token_secret
