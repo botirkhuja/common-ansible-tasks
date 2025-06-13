@@ -14,10 +14,11 @@
 - name: Log environment variables
   ansible.builtin.debug:
     msg: "{{lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE')}}"
+  register: env_file_content
 
 - name: save environment variables to file
   ansible.builtin.copy:
-    content: "{{ lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE') }}"
+    content: "{{env_file_content}}"
     dest: "{{ ansible_env.PWD }}/env"
     mode: '0644'
     owner: "{{ ansible_env.SUDO_USER }}"
