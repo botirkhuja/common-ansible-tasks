@@ -24,6 +24,7 @@ pipeline {
       string(name: 'HOSTS', defaultValue: '', description: 'The hosts to run the playbook on.')
       string(name: 'DEPLOYING_STACK', description: 'Choose the action to perform.')
       string(name: 'REGISTERABLE_DOMAIN', defaultValue: 'example.com', description: 'The domain to register.')
+      booleanParam(name: 'UNDEPLOY', defaultValue: false, description: 'Undeploy the stack if true.')
     }
 
     stages {
