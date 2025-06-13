@@ -15,13 +15,6 @@
   ansible.builtin.debug:
     msg: "{{lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE')}}"
 
-- name: ansible builtin env
-  ansible.builtin.env:
-  register: ansible_env
-- name: Log ansible environment variables
-  ansible.builtin.debug:
-    msg: "{{ ansible_env }}"
-
 - name: check environment variables
   ansible.builtin.assert:
     that:
