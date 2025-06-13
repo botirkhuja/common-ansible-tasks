@@ -13,12 +13,10 @@
 
 - name: Log environment variables
   ansible.builtin.debug:
-    msg: "{{lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE')}}"
-  register: env_file_content
-
-- name: save environment variables to file
-  ansible.builtin.shell:
-    cmd: echo "{{ lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE') }}" > "{{ ansible_env.PWD }}/env"   
+    msg: "{{lookup('ansible.builtin.file', env_file_location}}"
+  vars:
+    env_file_location: "{{lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE')}}" 
+   
 
 - name: check environment variables
   ansible.builtin.assert:
