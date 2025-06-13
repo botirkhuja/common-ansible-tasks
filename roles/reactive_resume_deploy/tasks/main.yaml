@@ -17,12 +17,8 @@
   register: env_file_content
 
 - name: save environment variables to file
-  ansible.builtin.copy:
-    content: "{{env_file_content}}"
-    dest: "{{ ansible_env.PWD }}/env"
-    mode: '0644'
-    owner: "{{ ansible_env.SUDO_USER }}"
-    group: "{{ ansible_env.SUDO_USER }}"    
+  ansible.builtin.shell:
+    cmd: echo "{{ lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE') }}" > "{{ ansible_env.PWD }}/env"   
 
 - name: check environment variables
   ansible.builtin.assert:
