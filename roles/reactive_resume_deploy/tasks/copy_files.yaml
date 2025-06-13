@@ -1,0 +1,11 @@
+- name: Copy environment file to remote host
+  ansible.builtin.copy:
+    src: "{{ env_file_location }}"
+    dest: "{{ ansible_env.PWD }}/docker-compose/{{given_directory}}/env"
+    mode: '0644'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+    force: no
+    backup: true
+  vars:
+    env_file_location: "{{lookup('ansible.builtin.env', 'REACTIVE_RESUME_ENV_FILE')}}" 
