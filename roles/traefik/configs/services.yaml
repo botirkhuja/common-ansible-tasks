@@ -110,7 +110,7 @@ http:
     reactiveresume-service:
       loadBalancer:
         servers:
-          - url: "http://192.168.50.150:3000"
+          - url: "http://192.168.50.87:3100"
         passHostHeader: true
 
     syncthing-service:
