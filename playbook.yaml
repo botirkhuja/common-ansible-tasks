@@ -55,3 +55,7 @@
       tags:
         - never
         - homepage_undeploy
+    - role: reactive_resume_deploy
+      tags:
+        - never
+        - reactive_resume_deploy
