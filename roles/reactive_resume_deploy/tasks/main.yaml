@@ -3,6 +3,21 @@
     name: common
     tasks_from: check-docker
 
-- ansible.builtin.import_role:
-    name: common
-    tasks_from: create-compose-directory
+# - ansible.builtin.import_role:
+#     name: common
+#     tasks_from: create-compose-directory
+
+# - ansible.builtin.import_role:
+#     name: common
+#     tasks_from: copy-compose-file
+
+- name: Log environment variables
+  ansible.builtin.debug:
+    msg: "{{ansible.builtin.env}}"
+
+- name: check environment variables
+  ansible.builtin.assert:
+    that:
+      - ansible_env.PWD is defined
+      - ansible_env.SUDO_USER is defined
+    fail_msg: "Required environment variables are not set: PWD or SUDO_USER"

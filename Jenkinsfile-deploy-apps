@@ -13,6 +13,7 @@ pipeline {
       DOMAIN_PROVIDER_USER_ID = credentials('DOMAIN_PROVIDER_USER_ID')
       PORKBUN_SECRET_API_KEY = credentials('PORKBUN_SECRET_API_KEY')
       PORKBUN_API_KEY = credentials('PORKBUN_API_KEY')
+      REACTIVE_RESUME_ENV_FILE = credentials('REACTIVE_RESUME_ENV_FILE')
     }
 
     parameters {
