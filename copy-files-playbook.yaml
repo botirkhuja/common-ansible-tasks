@@ -1,5 +1,5 @@
 - name: Copy config files to remote host
-  hosts: test-ubuntu
+  hosts: usa4foryou-server
   vars:
     registerable_domain: "{{ lookup('ansible.builtin.env', 'REGISTERABLE_DOMAIN') }}"
   tasks:
