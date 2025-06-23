@@ -33,10 +33,10 @@
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
-# - ansible.builtin.import_role:
-#     name: common
-#     tasks_from: copy-compose-file
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: copy-compose-file
 
-# - ansible.builtin.import_role:
-#     name: common
-#     tasks_from: compose-up
+- ansible.builtin.import_role:
+    name: common
+    tasks_from: compose-up
