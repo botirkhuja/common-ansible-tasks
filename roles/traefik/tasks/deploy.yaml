@@ -28,7 +28,7 @@
 - name: Copy traefik static config files to remote host
   ansible.builtin.template:
     src: "templates/traefik.yml.j2"
-    dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yaml"
+    dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yml"
     mode: '0755'  # Optional file permissions
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
