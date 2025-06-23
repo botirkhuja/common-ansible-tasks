@@ -1,28 +1,12 @@
-- name: Copy acme.json file to remote host
-  ansible.builtin.copy:
-    src: data/acme.json
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/acme.json"
-    mode: '0600'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
-    force: no
-    backup: true
-
-- name: Copy traefik files to remote host
+- name: Copy traefik dynamic config files to remote host
   ansible.builtin.template:
-    src: "configs/a-routers.j2"
-    # Ensure the destination path is correct
-    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/configs/a-routers.yaml"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     mode: '0755'  # Optional file permissions
     owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
     group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
   loop:
-    - { src: 'configs/a-routers.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/a-routers.yaml' }
-    - { src: 'configs/middlewares.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/middlewares.yaml' }
+    - { src: 'templates/a-routers.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/a-routers.yaml' }
+    - { src: 'templates/middlewares.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/middlewares.yaml' }
+    - { src: 'templates/services.yaml.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/services.yaml' }
     - { src: 'templates/traefik.yml.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yaml' }
-
-- ansible.builtin.import_role:
-    name: common
-    tasks_from: copy-compose-directory-files
-  vars:
-    src_folder: configs

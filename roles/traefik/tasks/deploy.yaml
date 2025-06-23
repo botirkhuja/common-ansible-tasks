@@ -15,8 +15,23 @@
   vars:
     given_directory: traefik/configs
 
-- ansible.builtin.import_tasks:
-    file: copy_files.yaml
+- name: Copy acme.json file to remote host
+  ansible.builtin.copy:
+    src: data/acme.json
+    dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/acme.json"
+    mode: '0600'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+    force: no
+    backup: true
+
+- name: Copy traefik static config files to remote host
+  ansible.builtin.template:
+    src: "templates/traefik.yml.j2"
+    dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yaml"
+    mode: '0755'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
 
 - ansible.builtin.import_role:
     name: common
