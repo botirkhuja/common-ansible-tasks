@@ -10,3 +10,18 @@
     - { src: 'templates/middlewares.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/middlewares.yaml' }
     - { src: 'templates/services.yaml.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/services.yaml' }
     - { src: 'templates/traefik.yml.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yaml' }
+  when: not external_facing | default(false)
+
+- name: Copy traefik dynamic config files to remote host for external facing
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0755'  # Optional file permissions
+    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
+    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+  loop:
+    - { src: 'templates/a-routers-external.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/a-routers.yaml' }
+    - { src: 'templates/middlewares-external.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/middlewares.yaml' }
+    - { src: 'templates/services-external.yaml.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/configs/services.yaml' }
+    - { src: 'templates/traefik.yml.j2', dest: '{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yaml' }
+  when: external_facing | default(false)

@@ -1,0 +1,14 @@
+http:
+  routers:
+
+    traefik-secure:
+      rule: Host(`traefik-dashboard.external.{{ registerable_domain }}`)
+      entryPoints:
+        - "https"
+      priority: 10
+      tls:
+        certresolver: namecheap
+        domains:
+          - main: "external.{{ registerable_domain }}"
+            sans: "*.external.{{ registerable_domain }}"
+      service: api@internal
