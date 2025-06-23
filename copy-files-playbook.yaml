@@ -16,7 +16,7 @@
   hosts: external-facing
   vars:
     registerable_domain: "{{ lookup('ansible.builtin.env', 'EXTERNAL_REGISTERABLE_DOMAIN') }}"
-    external-facing: true
+    external_facing: true
   tasks:
     - name: Copy traefik files
       ansible.builtin.import_role:
