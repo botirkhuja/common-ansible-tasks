@@ -9,6 +9,7 @@ pipeline {
       PORKBUN_SECRET_API_KEY = credentials('PORKBUN_SECRET_API_KEY')
       PORKBUN_API_KEY = credentials('PORKBUN_API_KEY')
       REGISTERABLE_DOMAIN = credentials('REGISTERABLE_DOMAIN')
+      EXTERNAL_REGISTERABLE_DOMAIN = credentials('EXTERNAL_REGISTERABLE_DOMAIN')
     }
 
     stages {
