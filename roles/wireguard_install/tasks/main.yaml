@@ -13,7 +13,7 @@
   register: wireguard_private_key
   changed_when: false
 - name: Generate WireGuard public key
-  ansible.builtin.command: "echo {{ wireguard_private_key.stdout }} | wg pubkey"
+  ansible.builtin.shell: "echo {{ wireguard_private_key.stdout }} | wg pubkey"
   register: wireguard_public_key
   changed_when: false
 
