@@ -63,7 +63,7 @@
         name: traefik
         tasks_from: copy_files
       vars:
-        registerable_domain: "{{ lookup('ansible.builtin.env', 'EXTERNAL_REGISTERABLE_DOMAIN') }}"
+        registerable_domain: "{{ lookup('ansible.builtin.env', 'REGISTERABLE_DOMAIN') }}"
         external_facing: true
       tags: 
         - never
