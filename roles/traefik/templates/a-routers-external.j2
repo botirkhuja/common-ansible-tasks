@@ -13,12 +13,12 @@ http:
             sans: "*.external.{{ registerable_domain }}"
       service: api@internal
 
-    wildcard:
+    filebrowser:
       entryPoints:
         - "https"
-      rule: HostRegexp(`^.+\.external\.{{ registerable_domain | replace(".", "\.") }}$`)
+      rule: Host(`filebrowser.external.{{ registerable_domain }}`)
       middlewares:
         - https-redirectscheme
         - default-headers
       tls: {}
-      service: wildcard-service
+      service: filebrowser-service
