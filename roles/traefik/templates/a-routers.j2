@@ -2,7 +2,7 @@ http:
   routers:
 
     traefik-secure:
-      rule: Host(`traefik-dashboard.local.{{ registerable_domain }}`)
+      rule: HostRegexp(`traefik-dashboard\.(ts|external|local)\.{{ registerable_domain }}`)
       entryPoints:
         - "https"
       priority: 10
@@ -13,6 +13,8 @@ http:
             sans: "*.ts.{{ registerable_domain }}"
           - main: "local.{{ registerable_domain }}"
             sans: "*.local.{{ registerable_domain }}"
+          - main: "external.{{ registerable_domain }}"
+            sans: "*.external.{{ registerable_domain }}"
       service: api@internal
     
     alist:
@@ -176,7 +178,7 @@ http:
     omv-navidrome:
       entryPoints:
         - "https"
-      rule: HostRegexp(`omv-navidrome\.(ts|local)\.{{ registerable_domain | replace(".", "\.") }}$`)
+      rule: HostRegexp(`omv-navidrome\.(ts|external|local)\.{{ registerable_domain | replace(".", "\.") }}$`)
       middlewares:
         - https-redirectscheme
         - default-headers
