@@ -22,3 +22,13 @@ http:
         - default-headers
       tls: {}
       service: filebrowser-service
+
+    photos:
+      entryPoints:
+        - "https"
+      rule: "Host(`photos.external.{{ registerable_domain }}`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: photos-service

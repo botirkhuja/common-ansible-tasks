@@ -19,19 +19,6 @@ http:
         customRequestHeaders:
           X-Forwarded-Proto: https
 
-    nextcloud-headers:
-      headers:
-        customFrameOptionsValue: SAMEORIGIN
-        customResponseHeaders:
-          Strict-Transport-Security: 15552
-
-    onlyoffice-headers:
-      headers:
-        customRequestHeaders:
-          X-Forwarded-Proto: https
-        accessControlAllowOriginList: "*"
-        accesscontrolalloworiginlist: "*"
-
     default-whitelist:
       ipAllowList:
         sourceRange:

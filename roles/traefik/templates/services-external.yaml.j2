@@ -5,3 +5,9 @@ http:
         servers:
           - url: "http://10.69.69.3:8090"
         passHostHeader: true
+
+    photos-service:
+      loadBalancer:
+        servers:
+          - url: "http://10.69.69.3:2283"
+        passHostHeader: true
