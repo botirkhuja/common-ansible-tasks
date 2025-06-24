@@ -40,6 +40,7 @@
       tags:
         - never
         - docker-install
+        - docker_install
     - role: ollama
       tags:
         - never
@@ -57,3 +58,15 @@
         - never
         - reactive_resume
         - reactive-resume
+
+- hosts: cloud-server
+  vars:
+    registerable_domain: "{{ lookup('ansible.builtin.env', 'EXTERNAL_REGISTERABLE_DOMAIN') }}"
+    external_facing: true
+  tasks:
+    - ansible.builtin.import_role:
+        name: traefik
+        tasks_from: copy_files
+      tags: 
+        - never
+        - traefik-copy-files
