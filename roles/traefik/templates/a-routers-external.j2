@@ -16,7 +16,7 @@ http:
     wildcard:
       entryPoints:
         - "https"
-      rule: HostRegexp(`^.+\.external.{{ registerable_domain | replace(".", "\.") }}$`)
+      rule: HostRegexp(`^.+\.external\.{{ registerable_domain | replace(".", "\.") }}$`)
       middlewares:
         - https-redirectscheme
         - default-headers
