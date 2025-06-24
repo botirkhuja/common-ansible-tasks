@@ -12,3 +12,13 @@ http:
           - main: "external.{{ registerable_domain }}"
             sans: "*.external.{{ registerable_domain }}"
       service: api@internal
+
+    wildcard:
+      entryPoints:
+        - "https"
+      rule: HostRegexp(`^.+\.external.{{ registerable_domain | replace(".", "\.") }}$`)
+      middlewares:
+        - https-redirectscheme
+        - default-headers
+      tls: {}
+      service: wildcard-service
