@@ -59,6 +59,12 @@ ubuntu-servers:
       ansible_become: true
       ansible_become_method: sudo
 
+    cloud-server:
+      ansible_host: 45.56.117.230
+      ansible_user: 'root'
+      # ansible_become: true
+      # ansible_become_method: sudo
+
     test-ubuntu:
       ansible_host: 192.168.50.206
       ansible_user: 'ubuntu'
