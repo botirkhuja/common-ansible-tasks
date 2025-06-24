@@ -2,5 +2,4 @@
 domain_provider_user_id: "{{ lookup('ansible.builtin.env', 'DOMAIN_PROVIDER_USER_ID') }}"
 porkbun_api_key: "{{ lookup('ansible.builtin.env', 'PORKBUN_API_KEY') }}"
 porkbun_secret_api_key: "{{ lookup('ansible.builtin.env', 'PORKBUN_SECRET_API_KEY') }}"
-registerable_domain: "{{ lookup('ansible.builtin.env', 'REGISTERABLE_DOMAIN') }}"
 given_directory: traefik

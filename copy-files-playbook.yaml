@@ -12,13 +12,13 @@
         name: traefik
         tasks_from: copy_files
 
-- name: Copy external files
+- name: Copy config files to external facing host
   hosts: external-facing
   vars:
     registerable_domain: "{{ lookup('ansible.builtin.env', 'EXTERNAL_REGISTERABLE_DOMAIN') }}"
     external_facing: true
   tasks:
-    - name: Copy traefik files
+    - name: "Copy traefik files with domain {{ lookup('ansible.builtin.env', 'EXTERNAL_REGISTERABLE_DOMAIN') }}"
       ansible.builtin.import_role:
         name: traefik
         tasks_from: copy_files
