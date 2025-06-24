@@ -20,18 +20,24 @@
     src: data/acme.json
     dest: "{{ ansible_env.PWD }}/docker-compose/traefik/data/acme.json"
     mode: '0600'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+    owner: "{{ sudo_user }}"  # Optional ownership
+    group: "{{ sudo_user }}"  # Optional group ownership
     force: no
     backup: true
+  vars:
+     # Fallback to 'root' if SUDO_USER is not set
+    sudo_user: "{{ ansible_env.SUDO_USER | default('root') }}"
 
 - name: Copy traefik static config files to remote host
   ansible.builtin.template:
     src: "templates/traefik.yml.j2"
     dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/data/traefik.yml"
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+    owner: "{{ sudo_user }}"  # Optional ownership
+    group: "{{ sudo_user }}"  # Optional group ownership
+  vars:
+     # Fallback to 'root' if SUDO_USER is not set
+    sudo_user: "{{ ansible_env.SUDO_USER | default('root') }}"
 
 - ansible.builtin.import_role:
     name: common

@@ -4,7 +4,10 @@
     src: "templates/docker-compose.yaml.j2"
     dest: "{{ ansible_env.PWD }}/docker-compose/{{ given_directory }}/docker-compose.yaml"
     mode: '0755'  # Optional file permissions
-    owner: "{{ ansible_env.SUDO_USER }}"  # Optional ownership
-    group: "{{ ansible_env.SUDO_USER }}"  # Optional group ownership
+    owner: "{{ sudo_user }}"  # Optional ownership
+    group: "{{ sudo_user }}"  # Optional group ownership
+  vars:
+     # Fallback to 'root' if SUDO_USER is not set
+    sudo_user: "{{ ansible_env.SUDO_USER | default('root') }}"
   notify:
     - Restart Docker Compose
