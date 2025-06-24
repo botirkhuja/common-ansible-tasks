@@ -1,0 +1,19 @@
+---
+- name: Install WireGuard from the official repository
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - wireguard-tools
+    - iptables
+
+- name: Generate WireGuard private key
+  ansible.builtin.command: wg genkey
+  register: wireguard_private_key
+  changed_when: false
+- name: Generate WireGuard public key
+  ansible.builtin.command: echo "{{ wireguard_private_key.stdout }}" | wg pubkey
+  register: wireguard_public_key
+  changed_when: false
+

@@ -58,6 +58,11 @@
         - never
         - reactive_resume
         - reactive-resume
+    - role: wireguard_install
+      tags:
+        - never
+        - wireguard-install
+        - wireguard_install
   tasks:
     - ansible.builtin.import_role:
         name: traefik
