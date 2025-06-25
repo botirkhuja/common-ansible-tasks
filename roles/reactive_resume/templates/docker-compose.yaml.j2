@@ -42,6 +42,8 @@ services:
     depends_on:
       - postgres
       - chrome
+    env_file:
+      - .env
     environment:
       # -- Environment Variables --
       PORT: 3000
