@@ -21,19 +21,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Storage (for image uploads)
-  minio:
-    image: minio/minio:latest
-    restart: unless-stopped
-    command: server /data
-    ports:
-      - "9000:9000"
-    volumes:
-      - minio_data:/data
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
-
   # Chrome Browser (for printing and previews)
   chrome:
     image: ghcr.io/browserless/chromium:v2.18.0 # Upgrading to newer versions causes issues
