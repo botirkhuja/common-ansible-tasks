@@ -21,16 +21,31 @@ services:
       timeout: 5s
       retries: 5
 
+  # Storage (for image uploads)
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data
+    ports:
+      - "9000:9000"
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+
   # Chrome Browser (for printing and previews)
   chrome:
-    image: ghcr.io/browserless/chromium:latest
+    image: ghcr.io/browserless/chromium:v2.18.0 # Upgrading to newer versions causes issues
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       TIMEOUT: 10000
       CONCURRENT: 10
       TOKEN: chrome_token
-      EXIT_ON_HEALTH_FAILURE: true
-      PRE_REQUEST_HEALTH_CHECK: true
+      EXIT_ON_HEALTH_FAILURE: "true"
+      PRE_REQUEST_HEALTH_CHECK: "true"
 
   app:
     image: amruthpillai/reactive-resume:latest
@@ -40,8 +55,6 @@ services:
     depends_on:
       - postgres
       - chrome
-    env_file:
-      - .env      
     environment:
       # -- Environment Variables --
       PORT: 3000
@@ -69,22 +82,20 @@ services:
       # -- Storage (Minio) --
       STORAGE_ENDPOINT: ${STORAGE_ENDPOINT}
       STORAGE_PORT: ${STORAGE_PORT}
-      # STORAGE_REGION: us-east-1 # Optional
+      STORAGE_REGION: us-central-1 # Optional
       STORAGE_BUCKET: reactive-resume
       STORAGE_ACCESS_KEY: ${STORAGE_ACCESS_KEY} 
       STORAGE_SECRET_KEY: ${STORAGE_SECRET_KEY}
-      STORAGE_USE_SSL: true
-
-      # -- Sentry (Optional) --
-      # SERVER_SENTRY_DSN:
-      # VITE_CLIENT_SENTRY_DSN:
+      STORAGE_USE_SSL: "true"
+      STORAGE_SKIP_BUCKET_CHECK: "false"
 
       # -- Crowdin (Optional) --
       # CROWDIN_PROJECT_ID:
       # CROWDIN_PERSONAL_TOKEN:
 
       # -- Email (Optional) --
-      # DISABLE_EMAIL_AUTH: true
+      # DISABLE_SIGNUPS: "false"
+      # DISABLE_EMAIL_AUTH: "true"
       # VITE_DISABLE_SIGNUPS: true
       # DISABLE_SIGNUPS: true
       # SKIP_STORAGE_BUCKET_CHECK: false
@@ -98,3 +109,14 @@ services:
       # GOOGLE_CLIENT_ID: google_client_id
       # GOOGLE_CLIENT_SECRET: google_client_secret
       # GOOGLE_CALLBACK_URL: http://localhost:3000/api/auth/google/callback
+
+      # -- OpenID (Optional) --
+      # VITE_OPENID_NAME: OpenID
+      # OPENID_AUTHORIZATION_URL:
+      # OPENID_CALLBACK_URL: http://localhost:3000/api/auth/openid/callback
+      # OPENID_CLIENT_ID:
+      # OPENID_CLIENT_SECRET:
+      # OPENID_ISSUER:
+      # OPENID_SCOPE: openid profile email
+      # OPENID_TOKEN_URL:
+      # OPENID_USER_INFO_URL:
