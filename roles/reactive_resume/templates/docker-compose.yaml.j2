@@ -34,6 +34,19 @@ services:
       EXIT_ON_HEALTH_FAILURE: "true"
       PRE_REQUEST_HEALTH_CHECK: "true"
 
+    # Storage (for image uploads)
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+
   app:
     image: amruthpillai/reactive-resume:latest
     restart: unless-stopped
@@ -69,13 +82,13 @@ services:
       # SMTP_URL: smtp://user:pass@smtp:587 # Optional
 
       # -- Storage (Minio) --
-      STORAGE_ENDPOINT: ${STORAGE_ENDPOINT}
-      STORAGE_PORT: ${STORAGE_PORT}
-      STORAGE_REGION: us-central-1 # Optional
-      STORAGE_BUCKET: reactive-resume
-      STORAGE_ACCESS_KEY: ${STORAGE_ACCESS_KEY} 
-      STORAGE_SECRET_KEY: ${STORAGE_SECRET_KEY}
-      STORAGE_USE_SSL: "true"
+      STORAGE_ENDPOINT: minio
+      STORAGE_PORT: 9000
+      STORAGE_REGION: us-east-1 # Optional
+      STORAGE_BUCKET: default
+      STORAGE_ACCESS_KEY: minioadmin
+      STORAGE_SECRET_KEY: minioadmin
+      STORAGE_USE_SSL: "false"
       STORAGE_SKIP_BUCKET_CHECK: "false"
 
       # -- Crowdin (Optional) --
