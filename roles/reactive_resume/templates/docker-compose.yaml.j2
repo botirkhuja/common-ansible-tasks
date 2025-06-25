@@ -75,7 +75,7 @@ services:
       STORAGE_BUCKET: reactive-resume
       STORAGE_ACCESS_KEY: ${STORAGE_ACCESS_KEY} 
       STORAGE_SECRET_KEY: ${STORAGE_SECRET_KEY}
-      STORAGE_USE_SSL: "true"
+      STORAGE_USE_SSL: ${STORAGE_USE_SSL} # Set to "true" if using HTTPS
       STORAGE_SKIP_BUCKET_CHECK: "false"
 
       # -- Crowdin (Optional) --
