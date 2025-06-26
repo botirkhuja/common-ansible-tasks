@@ -46,6 +46,8 @@ services:
       - chrome
     env_file:
       - .env
+    dns:
+      - 192.168.50.110
     environment:
       # -- Environment Variables --
       PORT: 3000
