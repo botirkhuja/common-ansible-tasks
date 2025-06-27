@@ -53,7 +53,7 @@ ubuntu-servers:
       ansible_become_method: sudo
       ansible_become_pass: '{{ lookup("ansible.builtin.env", "UBUNTU_WITH_GPU_PASS_PSW") }}'
 
-    external-facing:
+    supa-server:
       ansible_host: 192.168.50.175
       ansible_user: 'ubuntu'
       ansible_become: true

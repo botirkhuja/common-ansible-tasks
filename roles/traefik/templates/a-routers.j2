@@ -221,3 +221,21 @@ http:
         - https-redirectscheme
       tls: {}
       service: pihole-service
+
+    supabase:
+      rule: "Host(`supastudio.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls: {}
+      service: supastudio-service
+
+    supabase:
+      rule: "Host(`supa.local.{{ registerable_domain }}`)"
+      entryPoints:
+        - "https"
+      middlewares:
+        - https-redirectscheme
+      tls: {}
+      service: supa-service
