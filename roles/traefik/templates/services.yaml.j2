@@ -125,14 +125,8 @@ http:
           - url: "http://192.168.50.110"
         passHostHeader: true
 
-    supastudio-service:
+    forgejo-service:
       loadBalancer:
         servers:
-          - url: "http://192.168.50.175:8000"
-        passHostHeader: true
-
-    supa-service:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.50.175:3000"
+          - url: "http://192.168.50.87:3002"
         passHostHeader: true
