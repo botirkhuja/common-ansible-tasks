@@ -147,20 +147,20 @@
         href: https://jenkins.local.{{ registerable_domain }}
         description: Continuous integration and deployment
         icon: jenkins.svg
-        ping: 192.168.50.180:8080
-        siteMonitor: https://jenkins.local.{{ registerable_domain }}
+        ping: 192.168.50.180
+        siteMonitor: 192.168.50.180:8080
     - Min.io Console:
         href: https://console-minios3.local.{{ registerable_domain }}
         description: Min.IO S3 Object Storage
         icon: minio.svg
-        ping: 192.168.50.226:9001
+        ping: 192.168.50.226
         siteMonitor: http://192.168.50.226:9001
     - Forgejo:
         href: https://forgejo.local.{{ registerable_domain }}
         description: Lightweight software forge.
         icon: forgejo.svg
-        ping: forgejo.local.{{ registerable_domain }}
-        siteMonitor: https://forgejo.local.{{ registerable_domain }}
+        ping: 192.168.50.87
+        siteMonitor: http://192.168.50.87:3002
 
 
 - Cloud Storage:
